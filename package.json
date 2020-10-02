@@ -1,0 +1,28 @@
+{
+  "name": "electron_project",
+  "version": "1.0.0",
+  "description": "configuration Tool to Tecrea devices",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "install": "electron-rebuild",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "serial_port",
+    "configuration_tool",
+    "tecrea_devices"
+  ],
+  "author": "Manuel Posada",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^10.1.1",
+    "electron-rebuild": "^2.0.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "jquery": "^3.5.1",
+    "propper": "^1.0.3",
+    "serialport": "^9.0.1"
+  }
+}

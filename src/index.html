@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security_Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="X-Content-Security_Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
+
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/nav.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/section.css">
+  <link rel="stylesheet" href="../assets/css/demo.css">
+  
+  <!-- <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="../node_modules/propper/index.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
+
+  <title>Configurator TOOL</title>
+</head>
+
+<body>
+
+  <nav class="navMain js-nav">
+
+    <header class="navMain-header">
+      <h1 class="navMain-title">Configurator <strong>TOOL</strong></h1>
+      <svg class="navMain-header-icon">
+        <use xlink:href="../assets/img/icons.svg#icon-electron"></use>
+      </svg>
+    </header>
+
+    <div class="navMain-item u-category-windows">
+      <h5 class="navMain-category">
+        <svg class="navMain-icon">
+          <use xlink:href="../assets/img/icons.svg#icon-windows"></use>
+        </svg>
+        Conenct
+      </h5>
+      <div class="navMain-buttons">
+        <button class="demo-button" id="connect-button">Conectar</button>
+      </div>
+    </div>
+
+    <div class="show-com">
+      <label for="device_connected"> Device connected </label>
+      <input type="text" id="device_connected" placeholder="Device" disabled>
+    </div>
+    
+    <footer class="navMain-footer">
+      <button type="button" id="button-about" data-modal="about" class="navMain-footer-button">About</button>
+      <svg class="navMain-footer-icon"></svg>
+    </footer>
+
+    <img src="../assets/img/logoTecrea.png" class="fixed-bottom">
+  </nav>
+
+  <main class="content js-content" id="content"></main>
+  
+  <script src="index.js"></script>
+  <script src="components/dashboard1/dashboard1.js"></script>
+
+  <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+  <script src="../node_modules/propper/index.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+                    <!-- <div class="form-group col-md-2">
+                        <label for="device_connected" class="col-form-label-sm">Device connected</label>
+                        <input type="text" class="form-control form-control-sm" id="device_connected" placeholder="Device" disabled>
+                    </div> -->

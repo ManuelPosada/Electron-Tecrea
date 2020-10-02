@@ -1,0 +1,46 @@
+h1.title-dashboard {
+    font-size: 2.2em;
+    font-weight: 600;
+    /* margin-top: 1rem; */
+}
+
+.image-isquare{
+    width: 160px;
+    max-height:  300px;
+    background: transparent;
+    background-color: transparent;
+  }
+
+  .card-header{
+      padding: .35rem 1.25rem;
+  }
+
+  .card-body{
+      padding: .5rem;    
+  }
+
+  .form-group{
+      margin-bottom: .2rem;
+  }
+
+  .form-control-range{
+      width: 55%;
+  }
+
+  .col-form-label-sm {
+    padding-top: calc(.25rem + 1px);
+    padding-bottom: calc(.25rem + 1px);
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.0rem;
+}
+
+.badge-secondary {
+    color: #fff;
+    background-color: #007bff;
+}
