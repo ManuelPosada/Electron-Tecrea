@@ -10,16 +10,34 @@ const SerialPort = require('serialport')
 //     console.log(modalPath);
 // })
 
+
+    
 async function fetchHtmlAsText(url) {
     const pathFile = path.join('file://', __dirname, `components/${url}.html`)
     return await (await fetch(pathFile)).text();
 }
 
 async function loadHtml(htmlFile) {
-    // const clone = document.createElement("div");
+    const div = document.createElement("div");
+    div.innerHTML =  await fetchHtmlAsText(htmlFile);
+    div.classList.add("section");
+    div.setAttribute("id",`componenet-${htmlFile}-id`)
+    document.querySelector('.content').append(div);
+    document.querySelector('.js-content').classList.add('is-shown');
+    
+}
 
-    document.querySelector('.content').innerHTML = await fetchHtmlAsText(htmlFile);
-    document.querySelector('.js-content').classList.add('is-shown')
+loadHtml("dashboard1/dashboard1");
+loadHtml("dashboard2/dashboard2");
+
+const showTemaple = (component) => {
+    debugger;
+    const sections = document.querySelector('.section.is-shown')  
+    if(sections){
+        sections.classList.remove("is-shown");
+    }
+    document.getElementById(`componenet-${component}-id`).classList.add("is-shown")
+
 }
 
 
@@ -37,19 +55,19 @@ connectButton.addEventListener('click', function (event) {
         serialPortlList.forEach((device) => {
             if (device.vendorId === "0403") {
                 device_connected = device;
-                loadHtml("dashboard1/dashboard1");
+                showTemaple("dashboard1/dashboard1");
                 openPort(device.path); 
             } else if (device.vendorId === "067B") {
                 device_connected = device;
-                loadHtml("dashboard1/dashboard2");
+                showTemaple("dashboard1/dashboard2");
                 openPort(device.path);
             }else {
                 //Plantilla no encontro nigun boton
-                loadHtml("dashboard2/dashboard1");
+                showTemaple("dashboard2/dashboard1");
             }
         })
         if(serialPortlList.length<=0){
-            loadHtml("dashboard1/dashboard1viejo");
+            showTemaple("dashboard1/dashboard1");
         }
     })
 });
