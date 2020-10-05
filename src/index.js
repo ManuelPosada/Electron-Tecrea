@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron')
 const electron = require('electron')
 const path = require('path')
-const SerialPort = require('serialport')
+//const SerialPort = require('serialport')
 
 
 // notifyBtn.addEventListener('click', function (event) {
@@ -17,21 +17,36 @@ async function fetchHtmlAsText(url) {
     return await (await fetch(pathFile)).text();
 }
 
+const loadCSS = (componenet) => {
+    const styleSheet = document.createElement("link");
+    styleSheet.rel="stylesheet";
+    styleSheet.href = `components/${componenet}.css`;
+    document.querySelector("head").appendChild(styleSheet);
+}
+
+const loadJs = (componenet) => {
+    const script = document.createElement("script");
+    script.type ="text/javascript";
+    script.src = `components/${componenet}.js`;
+    document.querySelector("body").appendChild(script);
+}
+
 async function loadHtml(htmlFile) {
+    loadCSS(htmlFile);
     const div = document.createElement("div");
     div.innerHTML =  await fetchHtmlAsText(htmlFile);
     div.classList.add("section");
     div.setAttribute("id",`componenet-${htmlFile}-id`)
     document.querySelector('.content').append(div);
-    document.querySelector('.js-content').classList.add('is-shown');
-    
+    document.querySelector('.js-content').classList.add('is-shown'); 
+    loadJs(htmlFile);  
 }
+
 
 loadHtml("dashboard1/dashboard1");
 loadHtml("dashboard2/dashboard2");
 
 const showTemaple = (component) => {
-    debugger;
     const sections = document.querySelector('.section.is-shown')  
     if(sections){
         sections.classList.remove("is-shown");
@@ -39,13 +54,16 @@ const showTemaple = (component) => {
     document.getElementById(`componenet-${component}-id`).classList.add("is-shown")
 
 }
-
-
 ipcRenderer.on('targetPriceVal', function (event, arg) {
     targetPriceVal = Number(arg)
     targetPrice.innerHTML = '$' + targetPriceVal.toLocaleString('en')
 })
 
+setTimeout(() => {
+    showTemaple("dashboard1/dashboard1")
+},1000)
+
+/*
 let device_connected = {};
 const connectButton = document.getElementById("connect-button");
 connectButton.addEventListener('click', function (event) {
@@ -103,4 +121,4 @@ const openPort = (path) => {
       port.on('data', function (data) {
         console.log('Data:', data)
       })
-}
+}*/

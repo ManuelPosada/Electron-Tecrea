@@ -25,7 +25,6 @@
 <body>
 
   <nav class="navMain js-nav">
-
     <header class="navMain-header">
       <h1 class="navMain-title">Configurator <strong>TOOL</strong></h1>
       <svg class="navMain-header-icon">
@@ -61,10 +60,11 @@
   <main class="content js-content" id="content"></main>
   
   <script src="index.js"></script>
-  
-  <script src="components/dashboard1/dashboard1.js"></script>
 
-  <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+
+<script>
+    window.jQuery = window.$ = require('jquery');
+</script>
   <script src="../node_modules/propper/index.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
