@@ -25,6 +25,7 @@ h1.title-dashboard {
 
   .form-control-range{
       width: 55%;
+      /* transform: rotate(-90deg); */
   }
 
   .col-form-label-sm {

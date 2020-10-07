@@ -1,17 +1,8 @@
 const { ipcRenderer } = require('electron')
 const electron = require('electron')
 const path = require('path')
-//const SerialPort = require('serialport')
+const SerialPort = require('serialport')
 
-
-// notifyBtn.addEventListener('click', function (event) {
-//     const modalPath = path.join('file://', __dirname, 'prueba.html')
-//     document.importNode(modalPath,true);
-//     console.log(modalPath);
-// })
-
-
-    
 async function fetchHtmlAsText(url) {
     const pathFile = path.join('file://', __dirname, `components/${url}.html`)
     return await (await fetch(pathFile)).text();
@@ -42,28 +33,22 @@ async function loadHtml(htmlFile) {
     loadJs(htmlFile);  
 }
 
-
 loadHtml("dashboard1/dashboard1");
 loadHtml("dashboard2/dashboard2");
 
 const showTemaple = (component) => {
     const sections = document.querySelector('.section.is-shown')  
-    if(sections){
+    if(sections) {
         sections.classList.remove("is-shown");
     }
     document.getElementById(`componenet-${component}-id`).classList.add("is-shown")
-
 }
+
 ipcRenderer.on('targetPriceVal', function (event, arg) {
     targetPriceVal = Number(arg)
     targetPrice.innerHTML = '$' + targetPriceVal.toLocaleString('en')
 })
 
-setTimeout(() => {
-    showTemaple("dashboard1/dashboard1")
-},1000)
-
-/*
 let device_connected = {};
 const connectButton = document.getElementById("connect-button");
 connectButton.addEventListener('click', function (event) {
@@ -121,4 +106,4 @@ const openPort = (path) => {
       port.on('data', function (data) {
         console.log('Data:', data)
       })
-}*/
+}
