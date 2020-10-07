@@ -140,12 +140,14 @@ kbd {
 .content {
   flex: 1;
   position: relative;
-  background-image: url("../img/fondo-asi-trabajamos.jpg");
+  /* background-image: url("../img/fondo-asi-trabajamos.jpg"); */
+  background-image: url("../img/fondo_metodologia.png");
+  /* background-image:  url("../img/imagen2.png"); */
   background-size: cover;
-  background-repeat: no-repeat
-  
-  
+  background-repeat: no-repeat;
+  /* background-color: ; */
 }
+
 .content.is-shown {
   visibility: visible;;
   opacity: 1;

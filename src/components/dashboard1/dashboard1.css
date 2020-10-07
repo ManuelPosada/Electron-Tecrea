@@ -39,6 +39,8 @@ h1.title-dashboard {
 label {
     display: inline-block;
     margin-bottom: 0.0rem;
+    font-size: small;
+    font-weight: 500;
 }
 
 .badge-secondary {

@@ -47,6 +47,35 @@
                     </div>
                 </div>
 
+                <!-- card check parameters  -->
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-header"><strong>Reports Enablers</strong></div>
+                        <div class="card-body">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" name="WiFi" class="custom-control-input" id="WiFiSwitch">
+                                <label class="custom-control-label" for="WiFiSwitch">Report Wi-Fi Location</label>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" name="AlwaysReport" class="custom-control-input" id="AlwaysReportSwitch">
+                                <label class="custom-control-label" for="AlwaysReportSwitch">Always Send report</label>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" name="DownLink" class="custom-control-input" id="DownLinkSwitch">
+                                <label class="custom-control-label" for="DownLinkSwitch">Downlink Enable</label>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" name="RedundantMsn" class="custom-control-input" id="RedundantMsnSwitch">
+                                <label class="custom-control-label" for="RedundantMsnSwitch">Redundant Messge</label>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" name="OnlySend" class="custom-control-input" id="OnlySendSwitch">
+                                <label class="custom-control-label" for="OnlySendSwitch">Only Send location</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- card with the content of Analog input 1 -->
                 <div class="col-sm-3">
                     <div class="card">
@@ -112,6 +141,65 @@
             </div>
 
             <div class="row">
+
+                <!-- card with Battery content -->
+                <div class="col-sm-3">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="col-sm-10"><strong>Battery (%)</strong></div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" name="Battery" class="custom-control-input" id="BatterySwitch">
+                                    <label class="custom-control-label" for="BatterySwitch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <label for="BatteryRange" class="col-form-label-sm col-sm-2">Max</label>
+                                    <input type="range" class="form-control-range" id="BatteryRange" step="1" max="100" value="50" disabled>
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1" id="BatterySpan">50</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card with the Digital Input content -->
+                <div class="col-sm-3">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="col-sm-10"><strong>Digital Input Options</strong></div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" name="DigitalIn" class="custom-control-input" id="DISwitch">
+                                    <label class="custom-control-label" for="DISwitch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="DigitalIn1Select">Digital Input 1</label>
+                                <select class="form-control" id="DigitalIn1Select" disabled>
+                                    <option>Rising Edge</option>
+                                    <option>Falling Edge</option>
+                                    <option>Both</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="DigitalIn2Select">Digital Input 2</label>
+                                <select class="form-control" id="DigitalIn2Select" disabled>
+                                    <option>Rising Edge</option>
+                                    <option>Falling Edge</option>
+                                    <option>Both</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card with the content of Humidity -->
                 <div class="col-sm-3">
                     <div class="card">
                         <div class="card-header">
@@ -141,6 +229,157 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- card with the content of Temperature -->
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="col-sm-10"><strong>Temperature (°C)</strong></div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" name="Temperature" class="custom-control-input" id="TempSwitch">
+                                    <label class="custom-control-label" for="TempSwitch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <label for="TempRangeMax" class="col-form-label-sm col-sm-2">Max</label>
+                                    <input type="range" class="form-control-range" id="TempRangeMax" step="1" max="125" min="-40" value="0" disabled>
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1" id="TempSpanMax">0</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <label for="TempRangeMin" class="col-form-label-sm col-sm-2">Min</label>
+                                    <input type="range" class="form-control-range" id="TempRangeMin" step="1" max="125" min="-40" value="0" disabled>
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1" id="TempSpanMin">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+
+            <div class="row">
+                <!-- card with the SigFox Frecuency content -->
+                <div class="col-sm-3">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="col-sm-10"><strong>Sigfox Zone</strong></div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" name="SigFoxZone" class="custom-control-input" id="ZoneSwitch">
+                                    <label class="custom-control-label" for="ZoneSwitch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ZoneSelect">Zone</label>
+                                <select class="form-control" id="ZoneSelect" disabled>
+                                    <option>RC2</option>
+                                    <option>RC4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card with Color content -->
+                <div class="col-sm-3">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="col-sm-10"><strong>LED Color</strong></div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" name="SigFoxZone" class="custom-control-input" id="ColorSwitch">
+                                    <label class="custom-control-label" for="ColorSwitch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ZoneSelect">Zone</label>
+                                <select class="form-control" id="ColorSelect" disabled>
+                                    <option style="background-color: #ffff00;">0</option>
+                                    <option style="background-color: #0000ff;">1</option>
+                                    <option style="background-color: #ff0000;">2</option>
+                                    <option style="background-color: #00ff00;">3</option>
+                                    <option style="background-color: #00ffff;">4</option>
+                                    <option style="background-color: #ff00ff;">5</option>
+                                    <option style="background-color: #000000;">6</option>
+                                    <option>RC4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card with the content of Vibration -->
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="col-sm-10"><strong>Vibration</strong></div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" name="Vibration" class="custom-control-input" id="VibrationSwitch">
+                                    <label class="custom-control-label" for="VibrationSwitch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <label for="VibrationRangeMax" class="col-form-label-sm col-sm-2">Max</label>
+                                    <input type="range" class="form-control-range" id="VibrationRangeMax" step="1" max="100" value="50" disabled>
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1" id="VibrationSpanMax">50</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <label for="VibrationRangeMin" class="col-form-label-sm col-sm-2">Min</label>
+                                    <input type="range" class="form-control-range" id="VibrationRangeMin" step="1" max="100" value="50" disabled>
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1" id="VibrationSpanMin">50</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card with the content of Tilt Angle -->
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="col-sm-10"><strong>Tilt Angle (0°- 360°)</strong></div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" name="Angle" class="custom-control-input" id="AngleSwitch">
+                                    <label class="custom-control-label" for="AngleSwitch"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <label for="AngleRangeMax" class="col-form-label-sm col-sm-2">Max</label>
+                                    <input type="range" class="form-control-range" id="AngleRangeMax" step="1" max="360" value="90" disabled>
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1" id="AngleSpanMax">90</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <label for="AngleRangeMin" class="col-form-label-sm col-sm-2">Min</label>
+                                    <input type="range" class="form-control-range" id="AngleRangeMin" step="1" max="360" value="90" disabled>
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1" id="AngleSpanMin">90</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <input id="dashboard1-submit" type="submit"> </input>
