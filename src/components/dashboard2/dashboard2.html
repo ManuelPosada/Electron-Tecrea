@@ -1,124 +1,126 @@
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <h4> Smart cities</h4>
-        </div>
-        <div class="col-6">
-            <img class="image-isquare" src="../assets/img/Ibutton.png" alt="">
-        </div>
-        <div class="col-10">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-sm-2">
-                        <label for="inputEmail4" class="col-form-label-sm">Horas</label>
-                        <input type="number" class="form-control form-control-sm" id="inputEmail4" min="0" max="23" placeholder="0">
-                    </div>
-                    <div class="form-group col-sm-2">
-                        <label for="inputPassword4" class="col-form-label-sm">Minutos</label>
-                        <input type="number" class="form-control form-control-sm" id="inputPassword4" min="0" max="59" placeholder="0">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="inputPassword4" class="col-form-label-sm">Segundos</label>
-                        <input type="number" class="form-control form-control-sm" id="inputPassword4" min="0" max="59" placeholder="0">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="device_connected" class="col-form-label-sm">Device connected</label>
-                        <input type="text" class="form-control form-control-sm" id="device_connected" placeholder="Device" disabled>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                <div class=" col-sm-4">
-                    <div class="card">
-                        <div class="card-header">
-                            Analog Input 1
-                          </div>
-                        <div class="card-body">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Enable</label>
-                            </div>
-                            <div class="form-group">
-                                <label for="formControlRange">Max</label>
-                                <input type="range" class="form-control-range" id="formControlRange">
-                            </div>
-                            <div class="form-group">
-                                <label for="formControlRange">Min</label>
-                                <input type="range" class="form-control-range" id="formControlRange">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-header">
-                            Analog Input 2
-                          </div>
-                        <div class="card-body">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                <label class="custom-control-label" for="customSwitch2">Enable</label>
-                            </div>
-                            <div class="form-group">
-                                <label for="formControlRange">Max</label>
-                                <input type="range" class="form-control-range" id="formControlRange">
-                            </div>
-                            <div class="form-group">
-                                <label for="formControlRange">Min</label>
-                                <input type="range" class="form-control-range" id="formControlRange">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-header">
-                            Angle
-                          </div>
-                        <div class="card-body">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                <label class="custom-control-label" for="customSwitch2">Enable</label>
-                            </div>
-                            <div class="form-group">
-                                <label for="formControlRange">Max</label>
-                                <input type="range" class="form-control-range" id="formControlRange">
-                            </div>
-                            <div class="form-group">
-                                <label for="formControlRange">Min</label>
-                                <input type="range" class="form-control-range" id="formControlRange">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h4> Smart cities</h4>
             </div>
+            <div class="col-6">
+                <img class="image-isquare" src="../assets/img/Ibutton.png" alt="">
+            </div>
+            <div class="col-10">
+                <form action="#" id="formDashboard2"> 
+                    <div class="form-row">
+                        <div class="form-group col-sm-2">
+                            <label for="inputEmail4" class="col-form-label-sm">Horas</label>
+                            <input type="number" name="dashboard2_hours" class="form-control form-control-sm" id="inputEmail4" min="0" max="23" placeholder="0">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label for="inputPassword4" class="col-form-label-sm">Minutos</label>
+                            <input type="number" name="dashboard2_minutes" class="form-control form-control-sm" id="inputPassword4" min="0" max="59" placeholder="0">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputPassword4" class="col-form-label-sm">Segundos</label>
+                            <input type="number" class="form-control form-control-sm" id="inputPassword4" min="0" max="59" placeholder="0">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="device_connected" class="col-form-label-sm">Device connected</label>
+                            <input type="text" class="form-control form-control-sm" id="device_connected" placeholder="Device" disabled>
+                        </div>
+                    </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity">
+
+                    <div class="row">
+                    <div class=" col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Analog Input 1
+                            </div>
+                            <div class="card-body">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                    <label class="custom-control-label" for="customSwitch1">Enable</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formControlRange">Max</label>
+                                    <input type="range" class="form-control-range" id="formControlRange">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formControlRange">Min</label>
+                                    <input type="range" class="form-control-range" id="formControlRange">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputState">State</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
+
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Analog Input 2
+                            </div>
+                            <div class="card-body">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                                    <label class="custom-control-label" for="customSwitch2">Enable</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formControlRange">Max</label>
+                                    <input type="range" class="form-control-range" id="formControlRange">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formControlRange">Min</label>
+                                    <input type="range" class="form-control-range" id="formControlRange">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                 
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Angle
+                            </div>
+                            <div class="card-body">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                                    <label class="custom-control-label" for="customSwitch2">Enable</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formControlRange">Max</label>
+                                    <input type="range" class="form-control-range" id="formControlRange">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formControlRange">Min</label>
+                                    <input type="range" class="form-control-range" id="formControlRange">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                            Check me out
-                        </label>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                    
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
-            </form>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</section>
