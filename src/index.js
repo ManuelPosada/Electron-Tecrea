@@ -1,14 +1,9 @@
 const { ipcRenderer } = require('electron')
-
-
-const connectButton = document.getElementById("connect-button");
-connectButton.addEventListener('click', (event) => {
-    showTemaple("dashboard1/dashboard1");
-})
-/*
 const SerialPort = require('serialport')
 
 const connectButton = document.getElementById("connect-button");
+let port = null;
+
 connectButton.addEventListener('click', (event) => {
 
     SerialPort.list().then((resultSerialPort) => {
@@ -37,7 +32,7 @@ connectButton.addEventListener('click', (event) => {
 
 const openPort = (path) => {
     console.log(path)
-    const port = new SerialPort(path, { 
+    port = new SerialPort(path, { 
             autoOpen: false,
             baudRate: 115200,
             dataBits:8,
@@ -48,7 +43,9 @@ const openPort = (path) => {
         if (err) {
             return console.log('Error opening port: ', err.message)
         }
-        port.write('main screen turn on')
+    port.write('main screen turn on');
+    
+
     })
     // The open event is always emitted
     port.on('open', function () {
@@ -62,9 +59,10 @@ const openPort = (path) => {
     port.on('readable', function () {
         console.log('Data1:', String.fromCharCode(...port.read()))
       })
+
       
       // Switches the port into "flowing mode"
       port.on('data', function (data) {
         console.log('Data2:', data)
       })
-}*/
+}

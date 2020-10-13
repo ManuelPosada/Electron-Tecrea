@@ -21,9 +21,6 @@ const commands = {
     "tilt_angle": "til"
 }
 
-
-
-
 /**
  *   Analog Input 1
 */
@@ -196,7 +193,7 @@ const commandGenerator = () => {
         arrayCommands.push(command);
         command = '';
     }
-    console.log(arrayCommands);
+    return arrayCommands;
 }
 
 /**
@@ -226,6 +223,14 @@ let json = {}
 //     commandGenerator();
 // });
 
+const sendCommands = (commandsList) => {
+    commandsList.forEach((command) => {
+        port.write(command);
+        console.log(port.read());
+        // String.fromCharCode(...port.read())
+
+    });
+}
 
 document.getElementById("form-dashboard1").addEventListener("submit", (event) => {
     event.preventDefault();
