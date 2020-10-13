@@ -47,3 +47,7 @@ label {
     color: #fff;
     background-color: #007bff;
 }
+
+.badge {
+    line-height: normal;
+}
