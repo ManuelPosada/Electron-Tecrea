@@ -7,7 +7,6 @@
   src: local('Source Code Pro'), local('SourceCodePro'), url(fonts/SourceCodePro-Regular.ttf) format('truetype');
 }
 
-
 /* Global ---------------------------- */
 
 * {
@@ -140,22 +139,20 @@ kbd {
 .content {
   flex: 1;
   position: relative;
-  /* background-image: url("../img/fondo-asi-trabajamos.jpg"); */
   background-image: url("../img/fondo_metodologia.png");
-  /* background-image:  url("../img/imagen2.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   /* background-color: ; */
 }
 
 .content.is-shown {
-  visibility: visible;;
+  visibility: visible;
   opacity: 1;
 }
 
 
 .section {
-  visibility: hidden;;
+  visibility: hidden;
   opacity: 0;
   margin: 0 0 0 0;
 }

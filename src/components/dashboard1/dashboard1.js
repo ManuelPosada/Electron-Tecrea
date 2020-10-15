@@ -283,7 +283,6 @@ const sendCommands = (commandsList) => {
         port.write(command);
         console.log(port.read());
         // String.fromCharCode(...port.read())
-
     });
 }
 
