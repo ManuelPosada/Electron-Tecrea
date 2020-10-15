@@ -1,24 +1,25 @@
 const { protocol, ipcMain } = require("electron");
-
+const { event } = require("jquery");
 
 const commands = {
     "time_transmition": "AT+TIME=",
-    "keep_alive": "kee",
-    "wifi_switch": "wif",
-    "always_report_switch": "alw",
-    "down_link_switch": "dow",
-    "redundant_msn_switch": "red",
-    "only_send_switch": "onl",
-    "analog_input_1": "ana",
-    "analog_input_2": "ana",
-    "battery_mah": "bat",
-    "digital_input_options": "dig",
-    "humidity": "hum",
-    "temperature": "tem",
-    "sigfox_zone": "sig",
-    "led_color": "led",
-    "vibration": "vib",
-    "tilt_angle": "til"
+    "keep_alive": "AT+KEEP=",
+    "wifi_switch": "AT+WIFI=",
+    "always_report_switch": "AT+ALWAYS=",
+    "down_link_switch": "AT+DL=",
+    "redundant_msn_switch": "AT+REPEAT=",
+    "only_send_switch": "AT+ONLYLOC=",
+    "gps_switch": "AT+GPS=",
+    "analog_input_1": "AT+ADC=1",
+    "analog_input_2": "AT+ADC=2",
+    "battery_mah": "AT+BATT=",
+    "digital_input_options": "AT+DI=",
+    "humidity": "AT+HUMI=",
+    "temperature": "AT+TEMP=",
+    "sigfox_zone": "AT+RCZ=",
+    "led_color": "AT+LED=",
+    "vibration": "AT+VIB=",
+    "tilt_angle": "AT+ANGLE="
 }
 
 /**
@@ -165,16 +166,70 @@ document.getElementById("ZoneSwitch").addEventListener("change", (event) => {
 /**
  *  Led Color Selector
 */
+const ColorSwitch = document.getElementById("ColorSwitch");
+const pulsations = document.getElementById("pulsations");
+const Color1 = document.getElementById("Color1");
+const Color2 = document.getElementById("Color2");
+const Color3 = document.getElementById("Color3");
+const Cancel = document.getElementById("Cancel");
 
-document.getElementById("ColorSwitch").addEventListener("change", (event) => {
+ColorSwitch.addEventListener("change", (event) => {
     if (!event.target.checked) {
-        document.getElementById("ColorSelect").disabled = true;
+        Color1.disabled = true;
+        Color2.disabled = true;
+        Color3.disabled = true;
+        Cancel.disabled = true
+        pulsations.disabled = true;
     } else {
-        document.getElementById("ColorSelect").disabled = false;
+        Color1.disabled = false;
+        pulsations.disabled = false;
+    }
+    if ((pulsations.value == 0) && (event.target.checked === true)) {
+        Cancel.disabled = true;
+    }
+    if ((pulsations.value == 1) && (event.target.checked === true)) {
+        Color2.disabled = true;
+        Color3.disabled = true;
+        Cancel.disabled = false;
+    }
+    if ((pulsations.value == 2) && (event.target.checked === true)) {
+        Color2.disabled = false;
+        Color3.disabled = true;
+        Cancel.disabled = false;
+    }
+    if ((pulsations.value == 3) && (event.target.checked === true)) {
+        Color2.disabled = false;
+        Color3.disabled = false;
+        Cancel.disabled = false;
     }
 })
 
+pulsations.addEventListener("change", (event) => {
+    console.log(event.target.value)
+    if (event.target.value == 0) {
+        Cancel.disabled = true;
+    }
+    if (event.target.value == 1) {
+        Color2.disabled = true;
+        Color3.disabled = true;
+        Cancel.disabled = false;
+    }
+    if (event.target.value == 2) {
+        Color2.disabled = false;
+        Color3.disabled = true;
+        Cancel.disabled = false;
+    }
+    if (event.target.value == 3) {
+        Color2.disabled = false;
+        Color3.disabled = false;
+        Cancel.disabled = false;
+    }
+})
 
+Color1.addEventListener("change", (event) => {
+    console.log(event.target.value)
+    // Color1.style.background
+})
 
 /**
  *  commands generator
@@ -189,7 +244,7 @@ const commandGenerator = () => {
         for (value in json[section]) {
             command += json[section][value] + ',';
         }
-        command = command.slice(0, -1)
+        command = command.slice(0, -1) + "\r\n"
         arrayCommands.push(command);
         command = '';
     }
@@ -249,7 +304,7 @@ document.getElementById("form-dashboard1").addEventListener("submit", (event) =>
         }
     });
     console.log(json);
-    commandGenerator();
+    sendCommands(commandGenerator());
 })
 
 

@@ -43,24 +43,22 @@ const openPort = (path) => {
         if (err) {
             return console.log('Error opening port: ', err.message)
         }
-    port.write('main screen turn on');
+    port.write("String de prueba\n");
     
-
     })
     // The open event is always emitted
     port.on('open', function () {
         console.log(port.isOpen)
-        if(port.isOpen){
+        if(port.isOpen) {
             document.getElementById("device_connected").setAttribute("value", device_connected.path);
-        }else{
+        }else {
             
         }
     })
     port.on('readable', function () {
         console.log('Data1:', String.fromCharCode(...port.read()))
       })
-
-      
+     
       // Switches the port into "flowing mode"
       port.on('data', function (data) {
         console.log('Data2:', data)

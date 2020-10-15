@@ -39,7 +39,7 @@ h1.title-dashboard {
 label {
     display: inline-block;
     margin-bottom: 0.0rem;
-    font-size: small;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
@@ -50,4 +50,15 @@ label {
 
 .badge {
     line-height: normal;
+}
+
+.btn-Download_Read {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.btn-get{
+    font-weight: 600;
+    font-size: 0.9rem;
+    height: 25px;
 }
