@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron')
-const SerialPort = require('serialport')
+//const SerialPort = require('serialport')
 
 const connectButton = document.getElementById("connect-button");
 let port = null;
@@ -28,9 +28,12 @@ connectButton.addEventListener('click', (event) => {
             showTemaple("dashboard2/dashboard2");
         }
     })
+    
+   showTemaple("dashboard1/dashboard1");
 });
 
 const openPort = (path) => {
+    
     console.log(path)
     port = new SerialPort(path, { 
             autoOpen: false,

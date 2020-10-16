@@ -145,11 +145,11 @@
   background-color: transparent;
 }
 .demo-button:focus {
-  outline: none;
-  background-color: white;
+   outline: none;
+  /* background-color: white;  */
 }
 .demo-button:active {
-  border-color: var(--color-border);
+  /* border-color: var(--color-border); */
 }
 
 .demo-input {
