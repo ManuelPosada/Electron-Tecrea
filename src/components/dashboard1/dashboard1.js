@@ -1,64 +1,13 @@
 const { protocol, ipcMain } = require("electron");
-const { event } = require("jquery");
-import  Command  from "../commands.js"
-
-
-const commands = {
-    "time_transmition": "AT+TIME=",
-    "keep_alive": "AT+KEEP=",
-    "wifi_switch": "AT+WIFI=",
-    "always_report_switch": "AT+ALWAYS=",
-    "down_link_switch": "AT+DL=",
-    "redundant_msn_switch": "AT+REPEAT=",
-    "only_send_switch": "AT+ONLYLOC=",
-    "gps_switch": "AT+GPS=",
-    "analog_input_1": "AT+ADC=1",
-    "analog_input_2": "AT+ADC=2",
-    "battery_mah": "AT+BATT=",
-    "digital_input_options": "AT+DI=",
-    "humidity": "AT+HUMI=",
-    "temperature": "AT+TEMP=",
-    "sigfox_zone": "AT+RCZ=",
-    "led_color": "AT+LED=",
-    "vibration": "AT+VIB=",
-    "tilt_angle": "AT+ANGLE="
-}
-
-
-
-/* Examples commands
-at+axl=enable,mode,low,med,high 
-at+axl=enable,mode,xthresholdhigh,xthresholdlow,ythresholdhigh,ythresholdlow
-AT+ADC=channel,enable ,max,min
-AT+AIRQ=enable,max,min
-AT+ALWAYS=enable
-at+info?
-at+batt?
-AT+DI=channel,edge
-AT+DL=enable
-AT+GPS=enable
-at+help?
-AT+HT=sel,enable,max,min
-at+id?
-AT+iddev=dev
-at+iddev?
-AT+onlyloc=enable
-at+pac?
-AT+pulsed=npul,cev1,cev2,cev3,cevc
-AT+RCZ =zone
-at+read?
-AT+REPEAT=enable
-at+resetf
-at+save
-AT+TIME=keepalive,hours,minutes,seconds
-AT+WIFI=enable
-
-"ADC=%d,%u,%u,%d,%u,%u,TEMP=%d,%u,%u,HUM=%d,%u,%u,AQ=%d,%u,%u,FLAGS=%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,TIME=%d,%d,%d,AXL=%d,%d,%u,%u,%u,%u,%d,%u,%u,%u,COLOR=%d,%d,%d,%d,DI=%d,%d,ID=%s,PAC=%s\r\n"
-*/
+import { Command } from "../commands.js"
 
 /**
  *   Analog Input 1
 */
+
+
+const formDashboard1 = document.getElementById("form-dashboard1");
+
 const Analog1spanMax = document.getElementById("Analog1spanMax");
 const Analog1RangeMax = document.getElementById("Analog1RangeMax").addEventListener("input", (event) => {
     Analog1spanMax.innerText = event.target.value;
@@ -291,27 +240,6 @@ const commandGenerator = () => {
 
 let json = {}
 
-// document.getElementById("form-dashboard1").addEventListener("submit", (event) => {
-//     event.preventDefault();
-
-//     Array.prototype.forEach.call(event.target.querySelectorAll(".card"), (componente) => {
-//         let cardName = componente.querySelector(".card-header").innerText.trim()
-//         console.log(cardName);
-//         json[cardName] = {};
-//         Array.prototype.forEach.call(componente.querySelectorAll("input, select"), (input) => {
-//             if (input.type == "checkbox") {
-//                 json[cardName][input.name] = Number(input.checked);
-//             } else {
-//                 json[cardName][input.name] = input.value
-//                 console.log(input.value);
-//                 console.log(input.getAttribute('group'))
-//             }
-//         });
-//     })
-//     console.log(JSON.stringify(json));
-//     commandGenerator();
-// });
-
 const sendCommands = (commandsList) => {
     commandsList.forEach((command) => {
         port.write(command);
@@ -320,7 +248,7 @@ const sendCommands = (commandsList) => {
     });
 }
 const command = new Command();
-document.getElementById("form-dashboard1").addEventListener("submit", (event) => {
+formDashboard1.addEventListener("submit", (event) => {
     event.preventDefault();
     const component = event.target;
 
@@ -337,82 +265,54 @@ document.getElementById("form-dashboard1").addEventListener("submit", (event) =>
         }
     });
     console.log(json);
-    console.log(command.setCommand("ADC",{ ...json.analog_input_1, ...json.analog_input_2 }))
-    console.log(command.setCommand("ADC",{ channel: 1, ...json.analog_input_1 }))
-    console.log(command.setCommand("ADC",{ channel: 1, ...json.analog_input_1 }))
-    // sendCommands(commandGenerator());
-})
+    console.log(command.setCommand('TIME', { ...json.keep_alive, ...json.time_transmition }, true));
+    console.log(command.setCommand('WIFI', json.wifi_switch, true));
+    console.log(command.setCommand('ALWAYS', json.always_report_switch, true));
+    console.log(command.setCommand('DL', json.down_link_switch, true));
+    console.log(command.setCommand('REPEAT', json.redundant_msn_switch, true));
+    console.log(command.setCommand('ONLYLOC', json.only_send_switch, true));
+    console.log(command.setCommand('GPS', json.gps_switch, true));
+    console.log(command.setCommand('ADC', { channel: 1, ...json.analog_input_1 }, true));
+    console.log(command.setCommand('ADC', { channel: 2, ...json.analog_input_2 }, true));
+    console.log(command.setCommand('BATT', json.battery_mah, true));
+    console.log(command.setCommand('DI', json.digital_input_options, true));
+    console.log(command.setCommand('HUMI', json.humidity, true));
+    console.log(command.setCommand('TEMP', json.temperature, true));
+    console.log(command.setCommand('RCZ', json.sigfox_zone, true));
+    console.log(command.setCommand('LED', json.led_color, true));
+    console.log(command.setCommand('VIB', json.vibration, true));
+    console.log(command.setCommand('ANGLE', json.tilt_angle, true));
+    sendCommands(command.getBufferedCommands());
+});
 
 
-/*
-let formData = []
-document.getElementById("form-dashboard1").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const t = event.target;
-    const data = [
-        {
-            name: 'time_transmition',
-            enabled: true,
-            command: commands.time_transmition,
-            data: {
-                hour: t.time_transmition_hour.value,
-                minutes: t.time_transmition_minutes.value,
-                secods: t.time_transmition_secods.value,
-                // time_keep: t.time_transmition_time_kee.value
+document.getElementById("read_from_device").addEventListener("click",() => {
+    const dataRed = "ADC=12,0,0,0,0,0,TEMP=0,0,0,HUM=0,0,0,AQ=0,0,0,FLAGS=0,0,0,0,0,0,0,0,0,0,0,0,TIME=0,0,0,AXL=0,0,0,0,0,0,0,0,0,0,COLOR=0,0,0,0,DI=0,0,ID=003FD23F    ,PAC=1F6C175DC8BFAEE6"
+    setDataToHTML(command.getHumidity(dataRed));
+    setDataToHTML(command.getTime(dataRed));
+});
+
+const setDataToHTML = (data) => {
+    for (const paramsJson in data) {
+        if (data.hasOwnProperty(paramsJson)) {
+            let params = data[paramsJson];
+            for (const param in params) {
+                if (params.hasOwnProperty(param)) {
+                    const htmlElement = document.getElementById(param);
+                    if (htmlElement.type == 'checkbox') {
+                        htmlElement.checked = Boolean(params[param]);
+                        htmlElement.dispatchEvent( new Event("change"));
+                    } else if(htmlElement.type == 'range') {
+                        htmlElement.value = params[param];
+                        htmlElement.dispatchEvent( new Event("input"));
+                    }else  {
+                        htmlElement.value = params[param];
+                        htmlElement.dispatchEvent( new Event("change"));
+                    }
+                }
             }
-        },
-        {
-            name: 'keep_alive',
-            enabled: true,
-            command: commands.keep_alive,
-            data: {
-                keep_alive: t.keep_alive_keep_alive.value,
-            }
-        },
-        {
-            name: 'reports_enablers',
-            enabled: true,
-            command: commands.time_transmition,
-            data: {
-                hour: t.time_transmition_hour.value,
-                minutes: t.time_transmition_minutes.value,
-                secods: t.time_transmition_secods.value,
-                // time_keep: t.time_transmition_time_kee.value
-            }
-        },
-
-    ]
+        }
+    }
+}
 
 
-
-// });
-
-// const a =
-// {
-//     "Time Transmition":
-//         { "Horas": "0", "Minutos": "0", "Segundos": "0", "keepAlive": "0", "TimeKeep": "" }
-//     , "Reports Enablers":
-//         { "WiFi": 0, "AlwaysReport": 0, "DownLink": 0, "RedundantMsn": 0, "OnlySend": 0 }
-//     , "Analog Input 1": { "enabled": 0, "Analog1RangeMax": "2048", "Analog1RangeMin": "2048" },
-//     "Analog Input 2": { "enabled": 0, "Analog2RangeMax": "2048", "Analog2RangeMin": "2048" }, "Battery (%) (mah)": { "Battery": 0, "SocRange": "50", "VolRange": "3400" }, "Digital Input Options": { "DigitalIn": 0, "DigitalIn1Select": "Rising Edge", "DigitalIn2Select": "Rising Edge" }, "Humidity": { "humidity": 0, "HumidityRangeMax": "50", "HumidityRangeMin": "50" }, "Temperature (°C)": { "Temperature": 0, "TempRangeMax": "0", "TempRangeMin": "0" }, "Sigfox Zone": { "SigFoxZone": 0, "ZoneSelect": "RCZ2" }, "LED Color": { "SigFoxZone": 0, "ColorSelect": "0" }, "Vibration": { "Vibration": 0, "VibrationRangeMax": "50", "VibrationRangeMin": "50" }, "Tilt Angle (0°- 360°)": { "Angle": 0, "AngleRangeMax": "90", "AngleRangeMin": "90" }
-// }
-
-// // const b = event.target;
-// // const a = {
-// //     input_analog: {
-// //         command:'ac_dt',
-// //         data:{
-// //             campo1:b.tal.value,
-// //             campo2:b.tal2.value,
-// //             campo2:b.tal2.value
-// //         }
-// //     },
-// //     keep_alive:{
-// //         command:'ac_dt1',
-// //         data:{
-// //             campo2:"",
-// //             campo3:""
-// //         }
-// //     },
-
-// // }*/
