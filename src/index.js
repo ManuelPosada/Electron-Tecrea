@@ -1,5 +1,6 @@
-// const SerialPort = require('serialport')
+const SerialPort = require('serialport')
 
+let BUFFER = [];
 const connectButton = document.getElementById("connect-button");
 let port = null;
 
@@ -31,7 +32,7 @@ let port = null;
 connectButton.addEventListener('click', (event) => {
     showTemaple("dashboard1/dashboard1");
 
-/*    SerialPort.list().then((resultSerialPort) => {
+    SerialPort.list().then((resultSerialPort) => {
         const serialPortlList = resultSerialPort;
         serialPortlList.forEach((device) => {
             if (device.vendorId === "0403") {
@@ -81,12 +82,11 @@ const openPort = (path) => {
         }
     })
     port.on('readable', function () {
-        console.log('Data1:', String.fromCharCode(...port.read()))
+         BUFFER.push(String.fromCharCode(...port.read()));
       })
-     
+      
       // Switches the port into "flowing mode"
       port.on('data', function (data) {
         console.log('Data2:', data)
       })
-      */
-});
+};

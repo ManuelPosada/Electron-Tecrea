@@ -9,7 +9,7 @@ export class Command {
         if (buffer) this.bufferCommands.push(command);
     }
 
-    getCommand = () => {
+    getReadCommand = () => {
         return 'at+read?';
     }
 

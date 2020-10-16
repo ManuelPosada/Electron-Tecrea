@@ -288,9 +288,16 @@ formDashboard1.addEventListener("submit", (event) => {
 
 document.getElementById("read_from_device").addEventListener("click",() => {
     const dataRed = "ADC=12,0,0,0,0,0,TEMP=0,0,0,HUM=0,0,0,AQ=0,0,0,FLAGS=0,0,0,0,0,0,0,0,0,0,0,0,TIME=0,0,0,AXL=0,0,0,0,0,0,0,0,0,0,COLOR=0,0,0,0,DI=0,0,ID=003FD23F    ,PAC=1F6C175DC8BFAEE6"
-    setDataToHTML(command.getHumidity(dataRed));
-    setDataToHTML(command.getTime(dataRed));
+    port.write(command.getReadCommand());
+    setTimeout(() => {
+        const response = BUFFER.pop();
+        console.log(response);
+        setDataToHTML(command.getHumidity(response));
+        //setDataToHTML(command.getTime(response));
+    },5000)
+    
 });
+
 
 const setDataToHTML = (data) => {
     for (const paramsJson in data) {
