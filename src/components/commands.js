@@ -10,7 +10,7 @@ export class Command {
     }
 
     getReadCommand = () => {
-        return 'at+read?';
+        return 'at+read?' + '\r\n';
     }
 
     getBufferedCommands = () => {

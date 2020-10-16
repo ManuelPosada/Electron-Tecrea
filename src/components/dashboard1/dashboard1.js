@@ -292,8 +292,8 @@ document.getElementById("read_from_device").addEventListener("click",() => {
     setTimeout(() => {
         const response = BUFFER.pop();
         console.log(response);
-        setDataToHTML(command.getHumidity(response));
-        //setDataToHTML(command.getTime(response));
+        // setDataToHTML(command.getHumidity(response));
+        setDataToHTML(command.getTime(response));
     },5000)
     
 });
