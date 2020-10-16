@@ -338,7 +338,8 @@ document.getElementById("form-dashboard1").addEventListener("submit", (event) =>
     });
     console.log(json);
     console.log(command.setCommand("ADC",{ ...json.analog_input_1, ...json.analog_input_2 }))
-    console.log(command.setCommand("ADC",{ ...json.analog_input_1 }))
+    console.log(command.setCommand("ADC",{ channel: 1, ...json.analog_input_1 }))
+    console.log(command.setCommand("ADC",{ channel: 1, ...json.analog_input_1 }))
     // sendCommands(commandGenerator());
 })
 
