@@ -18,10 +18,10 @@
     opacity: 1;
   }
 
-  /* .fixed-bottom {
-    width: 10%;
-    margin-left: 10%;
-  } */
+   .fixed-bottom {
+    width: 250px;
+    margin-left: 25px;
+  } 
   .navMain-header {
     position: relative;
     padding: 2rem;

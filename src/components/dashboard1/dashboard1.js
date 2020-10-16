@@ -1,5 +1,7 @@
 const { protocol, ipcMain } = require("electron");
 const { event } = require("jquery");
+import  Command  from "../commands.js"
+
 
 const commands = {
     "time_transmition": "AT+TIME=",
@@ -21,6 +23,38 @@ const commands = {
     "vibration": "AT+VIB=",
     "tilt_angle": "AT+ANGLE="
 }
+
+
+
+/* Examples commands
+at+axl=enable,mode,low,med,high 
+at+axl=enable,mode,xthresholdhigh,xthresholdlow,ythresholdhigh,ythresholdlow
+AT+ADC=channel,enable ,max,min
+AT+AIRQ=enable,max,min
+AT+ALWAYS=enable
+at+info?
+at+batt?
+AT+DI=channel,edge
+AT+DL=enable
+AT+GPS=enable
+at+help?
+AT+HT=sel,enable,max,min
+at+id?
+AT+iddev=dev
+at+iddev?
+AT+onlyloc=enable
+at+pac?
+AT+pulsed=npul,cev1,cev2,cev3,cevc
+AT+RCZ =zone
+at+read?
+AT+REPEAT=enable
+at+resetf
+at+save
+AT+TIME=keepalive,hours,minutes,seconds
+AT+WIFI=enable
+
+"ADC=%d,%u,%u,%d,%u,%u,TEMP=%d,%u,%u,HUM=%d,%u,%u,AQ=%d,%u,%u,FLAGS=%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,TIME=%d,%d,%d,AXL=%d,%d,%u,%u,%u,%u,%d,%u,%u,%u,COLOR=%d,%d,%d,%d,DI=%d,%d,ID=%s,PAC=%s\r\n"
+*/
 
 /**
  *   Analog Input 1
@@ -285,7 +319,7 @@ const sendCommands = (commandsList) => {
         // String.fromCharCode(...port.read())
     });
 }
-
+const command = new Command();
 document.getElementById("form-dashboard1").addEventListener("submit", (event) => {
     event.preventDefault();
     const component = event.target;
@@ -303,7 +337,9 @@ document.getElementById("form-dashboard1").addEventListener("submit", (event) =>
         }
     });
     console.log(json);
-    sendCommands(commandGenerator());
+    console.log(command.setCommand("ADC",{ ...json.analog_input_1, ...json.analog_input_2 }))
+    console.log(command.setCommand("ADC",{ ...json.analog_input_1 }))
+    // sendCommands(commandGenerator());
 })
 
 

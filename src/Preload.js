@@ -14,7 +14,7 @@ const loadCSS = (componenet) => {
 
 const loadJs = (componenet) => {
     const script = document.createElement("script");
-    script.type ="text/javascript";
+    script.type ="module";
     script.src = `components/${componenet}.js`;
     document.querySelector("body").appendChild(script);
 }
