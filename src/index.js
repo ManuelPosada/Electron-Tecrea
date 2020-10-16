@@ -29,7 +29,6 @@ connectButton.addEventListener('click', (event) => {
         }
     })
     
-   showTemaple("dashboard1/dashboard1");
 });
 
 const openPort = (path) => {
