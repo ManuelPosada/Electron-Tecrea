@@ -13,6 +13,10 @@ export class Command {
         return 'at+read?\r\n';
     }
 
+    getSaveCommand = () => {
+        return 'at+save\r\n'
+    }
+
     clearBufferCommand = ( ) => {
         this.bufferCommands = [];
     }

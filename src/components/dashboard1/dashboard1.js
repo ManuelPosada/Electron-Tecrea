@@ -66,28 +66,18 @@ const VolRange = document.getElementById("VolRange").addEventListener("input", (
     VolSpan.innerText = event.target.value;
 });
 
-document.getElementById("BatterySwitch").addEventListener("change", (event) => {
-    if (!event.target.checked) {
-        document.getElementById("SocRange").disabled = true;
-        document.getElementById("VolRange").disabled = true;
-    } else {
-        document.getElementById("SocRange").disabled = false;
-        document.getElementById("VolRange").disabled = false;
-    }
-})
-
 /**
  *  Digital Inputs Selector
 */
-document.getElementById("DISwitch").addEventListener("change", (event) => {
-    if (!event.target.checked) {
-        document.getElementById("DigitalIn1Select").disabled = true;
-        document.getElementById("DigitalIn2Select").disabled = true;
-    } else {
-        document.getElementById("DigitalIn1Select").disabled = false;
-        document.getElementById("DigitalIn2Select").disabled = false;
-    }
-})
+// document.getElementById("DISwitch").addEventListener("change", (event) => {
+//     if (!event.target.checked) {
+//         document.getElementById("DigitalIn1Select").disabled = true;
+//         document.getElementById("DigitalIn2Select").disabled = true;
+//     } else {
+//         document.getElementById("DigitalIn1Select").disabled = false;
+//         document.getElementById("DigitalIn2Select").disabled = false;
+//     }
+// })
 
 /**
  *  Humidity
@@ -138,54 +128,54 @@ document.getElementById("TempSwitch").addEventListener("change", (event) => {
 /**
  *  Sigfox Zone Selector
 */
-document.getElementById("ZoneSwitch").addEventListener("change", (event) => {
-    if (!event.target.checked) {
-        document.getElementById("ZoneSelect").disabled = true;
-    } else {
-        document.getElementById("ZoneSelect").disabled = false;
-    }
-})
+// document.getElementById("ZoneSwitch").addEventListener("change", (event) => {
+//     if (!event.target.checked) {
+//         document.getElementById("ZoneSelect").disabled = true;
+//     } else {
+//         document.getElementById("ZoneSelect").disabled = false;
+//     }
+// })
 
 /**
  *  Led Color Selector
 */
-const ColorSwitch = document.getElementById("ColorSwitch");
+// const ColorSwitch = document.getElementById("ColorSwitch");
 const pulsations = document.getElementById("pulsations");
 const Color1 = document.getElementById("Color1");
 const Color2 = document.getElementById("Color2");
 const Color3 = document.getElementById("Color3");
 const Cancel = document.getElementById("Cancel");
 
-ColorSwitch.addEventListener("change", (event) => {
-    if (!event.target.checked) {
-        Color1.disabled = true;
-        Color2.disabled = true;
-        Color3.disabled = true;
-        Cancel.disabled = true
-        pulsations.disabled = true;
-    } else {
-        Color1.disabled = false;
-        pulsations.disabled = false;
-    }
-    if ((pulsations.value == 0) && (event.target.checked === true)) {
-        Cancel.disabled = true;
-    }
-    if ((pulsations.value == 1) && (event.target.checked === true)) {
-        Color2.disabled = true;
-        Color3.disabled = true;
-        Cancel.disabled = false;
-    }
-    if ((pulsations.value == 2) && (event.target.checked === true)) {
-        Color2.disabled = false;
-        Color3.disabled = true;
-        Cancel.disabled = false;
-    }
-    if ((pulsations.value == 3) && (event.target.checked === true)) {
-        Color2.disabled = false;
-        Color3.disabled = false;
-        Cancel.disabled = false;
-    }
-})
+// ColorSwitch.addEventListener("change", (event) => {
+//     if (!event.target.checked) {
+//         Color1.disabled = true;
+//         Color2.disabled = true;
+//         Color3.disabled = true;
+//         Cancel.disabled = true
+//         pulsations.disabled = true;
+//     } else {
+//         Color1.disabled = false;
+//         pulsations.disabled = false;
+//     }
+//     if ((pulsations.value == 0) && (event.target.checked === true)) {
+//         Cancel.disabled = true;
+//     }
+//     if ((pulsations.value == 1) && (event.target.checked === true)) {
+//         Color2.disabled = true;
+//         Color3.disabled = true;
+//         Cancel.disabled = false;
+//     }
+//     if ((pulsations.value == 2) && (event.target.checked === true)) {
+//         Color2.disabled = false;
+//         Color3.disabled = true;
+//         Cancel.disabled = false;
+//     }
+//     if ((pulsations.value == 3) && (event.target.checked === true)) {
+//         Color2.disabled = false;
+//         Color3.disabled = false;
+//         Cancel.disabled = false;
+//     }
+// })
 
 pulsations.addEventListener("change", (event) => {
     console.log(event.target.value)
@@ -242,7 +232,7 @@ async function sendCommands (commandsList) {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
+}
 
 const command = new Command();
 formDashboard1.addEventListener("submit", (event) => {
@@ -273,12 +263,13 @@ formDashboard1.addEventListener("submit", (event) => {
     console.log(command.setCommand('ADC', { channel: 2, ...json.analog_input_2 }, true));
     console.log(command.setCommand('BATT', json.battery_mah, true));
     console.log(command.setCommand('DI', json.digital_input_options, true));
-    console.log(command.setCommand('TEMP', { hum: 1, ...json.humidity }, true));
-    console.log(command.setCommand('TEMP', { tem: 2, ...json.temperature }, true));
+    console.log(command.setCommand('HT', { hum: 1, ...json.humidity }, true));
+    console.log(command.setCommand('HT', { tem: 2, ...json.temperature }, true));
     console.log(command.setCommand('RCZ', json.sigfox_zone, true));
-    console.log(command.setCommand('LED', json.led_color, true));
-    console.log(command.setCommand('VIB', json.vibration, true));
-    console.log(command.setCommand('ANGLE', json.tilt_angle, true));
+    console.log(command.setCommand('PULSED', json.led_color, true));
+    // console.log(command.setCommand('AXL', { vibr: 1, ...json.vibration }, true));
+    // console.log(command.setCommand('AXL', { Angu: 2, ...json.tilt_angle }, true));
+    console.log(command.setCommand('SAVE', {}, true));
     sendCommands(command.getBufferedCommands());
     command.clearBufferCommand();
 });

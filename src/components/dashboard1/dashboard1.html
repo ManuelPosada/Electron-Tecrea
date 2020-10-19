@@ -46,7 +46,7 @@
 
                 <div class="col-sm-3">
                     <div class="card mb-4">
-                        <div class="card-header"><strong>Time Transmition</strong></div>
+                        <div class="card-header"><strong>Scanning/Time Transmition</strong></div>
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="form-group col-sm-4">
@@ -179,24 +179,24 @@
                         <div class="card-header">
                             <div class="form-row">
                                 <div class="col-sm-10"><strong>Battery (%) (mah)</strong></div>
-                                <div class="custom-control custom-switch">
+                                <!-- <div class="custom-control custom-switch">
                                     <input type="checkbox" name="Battery" class="custom-control-input"  id="BatterySwitch" group="battery_mah">
                                     <label class="custom-control-label" for="BatterySwitch"></label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="SocRange" class="col-form-label-sm col-sm-2">Soc</label>
-                                    <input type="range" class="form-control-range" name="SocRange" id="SocRange" step="1" max="100" value="50" disabled group="battery_mah">
+                                    <input type="range" class="form-control-range" name="SocRange" id="SocRange" step="1" max="100" value="50" group="battery_mah">
                                     <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="SocSpan" id="SocSpan">50</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="VolRange" class="col-form-label-sm col-sm-2">Vol</label>
-                                    <input type="range" class="form-control-range" name="VolRange" id="VolRange" step="1" max="4200" min="2700" value="3400" disabled group="battery_mah">
+                                    <input type="range" class="form-control-range" name="VolRange" id="VolRange" step="1" max="4200" min="2700" value="3400" group="battery_mah">
                                     <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VolSpan" id="VolSpan">3400</span>
                                 </div>
                             </div>
@@ -210,28 +210,28 @@
                         <div class="card-header">
                             <div class="form-row">
                                 <div class="col-sm-10"><strong>Digital Input Options</strong></div>
-                                <div class="custom-control custom-switch">
+                                <!-- <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" name="DISwitch" id="DISwitch" group="digital_input_options">
                                     <label class="custom-control-label" for="DISwitch"></label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
                                     <label for="DigitalIn1Select" class="col-form-label-sm">Digital Input 1</label>
-                                    <select class="form-control form-control-sm" name="DigitalIn1Select" id="DigitalIn1Select" disabled group="digital_input_options">
-                                        <option>Rising Edge</option>
-                                        <option>Falling Edge</option>
-                                        <option>Both</option>
+                                    <select class="form-control form-control-sm" name="DigitalIn1Select" id="DigitalIn1Select" group="digital_input_options">
+                                        <option value="1">Rising Edge</option>
+                                        <option value="2">Falling Edge</option>
+                                        <option value="3">Both</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="DigitalIn2Select" class="col-form-label-sm">Digital Input 2</label>
-                                    <select class="form-control form-control-sm" name="DigitalIn2Select" id="DigitalIn2Select" disabled group="digital_input_options">
-                                        <option>Rising Edge</option>
-                                        <option>Falling Edge</option>
-                                        <option>Both</option>
+                                    <select class="form-control form-control-sm" name="DigitalIn2Select" id="DigitalIn2Select" group="digital_input_options">
+                                        <option value="1">Rising Edge</option>
+                                        <option value="2">Falling Edge</option>
+                                        <option value="3">Both</option>
                                     </select>
                                 </div>
                             </div>
@@ -310,18 +310,18 @@
                         <div class="card-header">
                             <div class="form-row">
                                 <div class="col-sm-10"><strong>Sigfox Zone</strong></div>
-                                <div class="custom-control custom-switch">
+                                <!-- <div class="custom-control custom-switch">
                                     <input type="checkbox" name="SigFoxZone" class="custom-control-input" name="ZoneSwitch" id="ZoneSwitch" group="sigfox_zone">
                                     <label class="custom-control-label" for="ZoneSwitch"></label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="ZoneSelect" class="col-form-label-sm">Zone</label>
-                                <select class="form-control form-control-sm" name="ZoneSelect" id="ZoneSelect" disabled group="sigfox_zone">
-                                    <option value="RCZ2">RCZ2</option>
-                                    <option value="RCZ4">RCZ4</option>
+                                <select class="form-control form-control-sm" name="ZoneSelect" id="ZoneSelect" group="sigfox_zone">
+                                    <option value="1">RCZ2</option>
+                                    <option value="2">RCZ4</option>
                                 </select>
                             </div>
                         </div>
@@ -334,71 +334,71 @@
                         <div class="card-header">
                             <div class="form-row">
                                 <div class="col-sm-10"><strong>LED Color</strong></div>
-                                <div class="custom-control custom-switch">
+                                <!-- <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" name="ColorSwitch" id="ColorSwitch" group="led_color">
                                     <label class="custom-control-label" for="ColorSwitch"></label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="form-group col-sm-4">
                                     <label for="pulsations" class="col-form-label-sm">Pulsations</label>
-                                    <input type="number"  class="form-control form-control-sm" name="Puls" id="pulsations" min="0" max="3" placeholder="0" value="0" group="led_color" disabled>
+                                    <input type="number"  class="form-control form-control-sm" name="Puls" id="pulsations" min="0" max="3" placeholder="0" value="0" group="led_color">
                                 </div>
                             </div>
  
                             <div class="form-row">
                                 <div class="form-group col-sm-3">
                                     <label for="Color1"  class="col-form-label-sm"> Color 1</label>
-                                    <select class="form-control form-control-sm" name="ColorSelect1" id="Color1" disabled group="led_color">
-                                        <option style="background-color: #000000;" value="1"></option>
-                                        <option style="background-color: #0000ff;"></option>
-                                        <option style="background-color: #00ff00;"></option>
-                                        <option style="background-color: #00ffff;"></option>
-                                        <option style="background-color: #ff0000;"></option>
-                                        <option style="background-color: #ff00ff;"></option>
-                                        <option style="background-color: #ffff00;"></option>
-                                        <option style="background-color: #ffffff;"></option>
+                                    <select class="form-control form-control-sm" name="ColorSelect1" id="Color1" group="led_color">
+                                        <option style="background-color: #000000; " value="1"></option>
+                                        <option style="background-color: #0000ff; " value="2"></option>
+                                        <option style="background-color: #00ff00; " value="3"></option>
+                                        <option style="background-color: #00ffff; " value="4"></option>
+                                        <option style="background-color: #ff0000; " value="5"></option>
+                                        <option style="background-color: #ff00ff; " value="6"></option>
+                                        <option style="background-color: #ffff00; " value="7"></option>
+                                        <option style="background-color: #ffffff; " value="8"></option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label for="Color2" class="col-form-label-sm">Color 2</label>
                                     <select class="form-control form-control-sm" name="ColorSelect2" id="Color2" disabled group="led_color">
-                                        <option style="background-color: #000000;" value="1"></option>
-                                        <option style="background-color: #0000ff;"></option>
-                                        <option style="background-color: #00ff00;"></option>
-                                        <option style="background-color: #00ffff;"></option>
-                                        <option style="background-color: #ff0000;"></option>
-                                        <option style="background-color: #ff00ff;"></option>
-                                        <option style="background-color: #ffff00;"></option>
-                                        <option style="background-color: #ffffff;"></option>
+                                        <option style="background-color: #000000;"value="1"></option>
+                                        <option style="background-color: #0000ff;"value="2"></option>
+                                        <option style="background-color: #00ff00;"value="3"></option>
+                                        <option style="background-color: #00ffff;"value="4"></option>
+                                        <option style="background-color: #ff0000;"value="5"></option>
+                                        <option style="background-color: #ff00ff;"value="6"></option>
+                                        <option style="background-color: #ffff00;"value="7"></option>
+                                        <option style="background-color: #ffffff;"value="8"></option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label for="Color3" class="col-form-label-sm">Color 3</label>
                                     <select class="form-control form-control-sm" name="ColorSelect3" id="Color3" disabled group="led_color">
-                                        <option style="background-color: #000000;" value="1"></option>
-                                        <option style="background-color: #0000ff;"></option>
-                                        <option style="background-color: #00ff00;"></option>
-                                        <option style="background-color: #00ffff;"></option>
-                                        <option style="background-color: #ff0000;"></option>
-                                        <option style="background-color: #ff00ff;"></option>
-                                        <option style="background-color: #ffff00;"></option>
-                                        <option style="background-color: #ffffff;"></option>
+                                        <option style="background-color: #000000;"value="1"></option>
+                                        <option style="background-color: #0000ff;"value="2"></option>
+                                        <option style="background-color: #00ff00;"value="3"></option>
+                                        <option style="background-color: #00ffff;"value="4"></option>
+                                        <option style="background-color: #ff0000;"value="5"></option>
+                                        <option style="background-color: #ff00ff;"value="6"></option>
+                                        <option style="background-color: #ffff00;"value="7"></option>
+                                        <option style="background-color: #ffffff;"value="8"></option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label for="Cancel" class="col-form-label-sm">Cancel</label>
                                     <select class="form-control form-control-sm" name="ColorSelectCancel" id="Cancel" disabled group="led_color">
-                                        <option style="background-color: #000000;" value="1"></option>
-                                        <option style="background-color: #0000ff;"></option>
-                                        <option style="background-color: #00ff00;"></option>
-                                        <option style="background-color: #00ffff;"></option>
-                                        <option style="background-color: #ff0000;"></option>
-                                        <option style="background-color: #ff00ff;"></option>
-                                        <option style="background-color: #ffff00;"></option>
-                                        <option style="background-color: #ffffff;"></option>
+                                        <option style="background-color: #000000;"value="1"></option>
+                                        <option style="background-color: #0000ff;"value="2"></option>
+                                        <option style="background-color: #00ff00;"value="3"></option>
+                                        <option style="background-color: #00ffff;"value="4"></option>
+                                        <option style="background-color: #ff0000;"value="5"></option>
+                                        <option style="background-color: #ff00ff;"value="6"></option>
+                                        <option style="background-color: #ffff00;"value="7"></option>
+                                        <option style="background-color: #ffffff;"value="8"></option>
                                     </select>
                                 </div>
                             </div>                        

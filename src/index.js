@@ -1,12 +1,12 @@
 const SerialPort = require('serialport');
 const ReadLine = require('@serialport/parser-readline');
 
-let BUFFER = [];             /** Incoming data buffer */             
-let serialPort = null;
-let Parser = null;
+let BUFFER = [];              /** Incoming data buffer */             
+let serialPort = null;        /** Serial Port object */
+let Parser = null;            /** Parser Object*/ 
 
-const VENDOR_ID_ST = '0483'  /** VendorId STMicroelctronics */
-const VENDOR_ID_FT = '0403'  /** VendorId FTDI32 */
+const VENDOR_ID_ST = '0483'   /** VendorId STMicroelctronics */
+const VENDOR_ID_FT = '0403'   /** VendorId FTDI32 */
 
 const CONECT_STATE = 'Connect'
 const DISCONNECT_STATE = 'Disconnect'
@@ -37,8 +37,12 @@ connectButton.addEventListener("click", (event) => {
                     showTemaple("dashboard1/dashboard1");
                     openPort(Device.path);
                 }
+                else if ( Device.vendorId === VENDOR_ID_FT) {
+                    showTemaple("dashboard2/dashboard2");
+                    openPort(Device.path);
+                }
             })
-            if(deviceList.length <=0 ) {
+            if(deviceList.length <= 0 ) {
                 showTemaple("dashboard2/dashboard2");
             }
         })
@@ -47,34 +51,13 @@ connectButton.addEventListener("click", (event) => {
     if (connectButton.innerText === DISCONNECT_STATE) {
         console.log("Dispositivo Deconectado")
         
-        serialPort.close(function (error) {
-            if (error) console.log(error.message)
-            changeStatusConnectButton()
-        })
+        if (serialPort.isOpen ) {
+            serialPort.close(function (error) {
+                if (error) console.log(error.message)
+            })
+        }
     }
 })
-
-// connectButton.addEventListener('click', (event) => {
-
-//     SerialPort.list().then((resultSerialPort) => {
-//         const serialPortlList = resultSerialPort;
-//         serialPortlList.forEach((device) => {
-//             if (device.vendorId === VENDOR_ID_ST) {;
-//                 showTemaple("dashboard1/dashboard1");
-//                 openPort(device.path);            
-//             } else if (device.vendorId === "067B") {
-//                 showTemaple("dashboard2/dashboard2");
-//                 openPort(device.path);
-//             }else {
-//                 showTemaple("dashboard1/dashboard1"); //Plantilla no encontro nigun boton
-//             }
-//         })
-//         if(serialPortlList.length<=0){
-//             showTemaple("dashboard2/dashboard2");
-//         }
-//     })
-// });
-
 
 const openPort = (path) => {
 
@@ -99,12 +82,18 @@ const openPort = (path) => {
     // Port closing event
     serialPort.on('close', function () {
         console.log('Port Close')
+        changeStatusConnectButton()
     })
 
-    // 
+    // Incoming data parser event
     Parser.on('data', function (data) {
         BUFFER.push(data)
         console.log('data:', data)
+    })
+
+    // Error event
+    serialPort.on('error', function (error) {
+        console.log('Error', error.message)
     })
 };
 
