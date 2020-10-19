@@ -13,6 +13,10 @@ export class Command {
         return 'at+read?\r\n';
     }
 
+    clearBufferCommand = ( ) => {
+        this.bufferCommands = [];
+    }
+
     getBufferedCommands = () => {
         return this.bufferCommands;
     }
@@ -63,7 +67,7 @@ export class Command {
         }
     }
     getAQ = (cadena) => {
-        const AQ = cadena.split('HUM=')[1].split('AQ')[0].split(',');
+        const AQ = cadena.split('AQ=')[1].split('FLAGS')[0].split(',');
         return {
             air_quality: {
                 enalbed: AQ[0],
@@ -76,18 +80,18 @@ export class Command {
         const flags = cadena.split('FLAGS=')[1].split('TIME')[0].split(',');
         return {
             flags: {
-                SocRange: flags[0],
-                GPSSwitch: flags[1],
+                // SocRange: flags[0],
+                gpsSwitch: flags[1],
                 WiFiSwitch: flags[2],
                 AlwaysReportSwitch: flags[3],
                 RedundantMsnSwitch: flags[4],
-                down_link_switch: flags[5],
-                KeepAlive: flags[6],
-                pulsation: flags[7],
+                DownLinkSwitch: flags[5],
+                // KeepAlive: flags[6],
+                // pulsation: flags[7],
                 OnlySendSwitch: flags[8],
-                idDivice: flags[9],
-                DoCtrl: flags[10],
-                ZoneSelect: flags[11]
+                // idDivice: flags[9],
+                // DoCtrl: flags[10],
+                // ZoneSelect: flags[11]
             }
         }
 

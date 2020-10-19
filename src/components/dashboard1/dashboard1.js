@@ -215,38 +215,34 @@ Color1.addEventListener("change", (event) => {
 })
 
 /**
- *  commands generator
- *  @param command
- */
-const commandGenerator = () => {
-
-    let command = '';
-    let arrayCommands = [];
-    for (section in json) {
-        command = commands[section];
-        for (value in json[section]) {
-            command += json[section][value] + ',';
-        }
-        command = command.slice(0, -1) + "\r\n"
-        arrayCommands.push(command);
-        command = '';
-    }
-    return arrayCommands;
-}
-
-/**
  * Check cards value from forms
  */
-
+let contador = 0
 let json = {}
 
-const sendCommands = (commandsList) => {
-    commandsList.forEach((command) => {
-        port.write(command);
-        console.log(port.read());
-        // String.fromCharCode(...port.read())
-    });
+async function sendCommands (commandsList) {
+    // commandsList.forEach((command) => {
+        // contador = contador + 1; 
+        // console.log(contador)
+        // serialPort.write(command);
+    //     setTimeout(() => {
+    //         console.log('Comamdo:', command)
+    //         const response = BUFFER.pop();
+    //         console.log(response);
+    //     },1000)
+    // });
+
+    for (const command in commandsList) {
+        console.log('Comamdo:', commandsList[command])
+        serialPort.write(commandsList[command]);
+        await sleep(1000)
+        BUFFER.pop();
+    }
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 const command = new Command();
 formDashboard1.addEventListener("submit", (event) => {
@@ -277,28 +273,30 @@ formDashboard1.addEventListener("submit", (event) => {
     console.log(command.setCommand('ADC', { channel: 2, ...json.analog_input_2 }, true));
     console.log(command.setCommand('BATT', json.battery_mah, true));
     console.log(command.setCommand('DI', json.digital_input_options, true));
-    console.log(command.setCommand('HUMI', json.humidity, true));
-    console.log(command.setCommand('TEMP', json.temperature, true));
+    console.log(command.setCommand('TEMP', { hum: 1, ...json.humidity }, true));
+    console.log(command.setCommand('TEMP', { tem: 2, ...json.temperature }, true));
     console.log(command.setCommand('RCZ', json.sigfox_zone, true));
     console.log(command.setCommand('LED', json.led_color, true));
     console.log(command.setCommand('VIB', json.vibration, true));
     console.log(command.setCommand('ANGLE', json.tilt_angle, true));
     sendCommands(command.getBufferedCommands());
+    command.clearBufferCommand();
 });
 
 
 document.getElementById("read_from_device").addEventListener("click", () => {
     serialPort.write(command.getReadCommand());
     setTimeout(() => {
-        // const response = BUFFER.pop();
-        // console.log(response);
-        // setDataToHTML(command.getHumidity(response));
-        console.log('BUFFER:', BUFFER)
-        // setDataToHTML(command.getTime(response));
-    },5000)
-    
+        console.log(BUFFER)
+        if (BUFFER.length > 1) BUFFER.pop()
+        const response = BUFFER.pop();
+        console.log(response);
+        setDataToHTML(command.getHumidity(response));
+        setDataToHTML(command.getTime(response));
+        setDataToHTML(command.getFlags(response));
+        setDataToHTML(command.getADC(response));
+    },3000)
 });
-
 
 const setDataToHTML = (data) => {
     for (const paramsJson in data) {
@@ -307,8 +305,9 @@ const setDataToHTML = (data) => {
             for (const param in params) {
                 if (params.hasOwnProperty(param)) {
                     const htmlElement = document.getElementById(param);
+                    // debugger
                     if (htmlElement.type == 'checkbox') {
-                        htmlElement.checked = Boolean(params[param]);
+                        htmlElement.checked = Boolean(Number(params[param]));
                         htmlElement.dispatchEvent( new Event("change"));
                     } else if(htmlElement.type == 'range') {
                         htmlElement.value = params[param];

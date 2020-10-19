@@ -21,75 +21,70 @@ portConfigurations = {
 
 const connectButton = document.getElementById("connect-button");
 
-
 function changeStatusConnectButton() {
     if (connectButton.innerText == CONECT_STATE) connectButton.innerText = DISCONNECT_STATE;
     else if (connectButton.innerText == DISCONNECT_STATE) connectButton.innerText = CONECT_STATE;
 }
 
-// connectButton.addEventListener("click", (event) => {
+connectButton.addEventListener("click", (event) => {
 
-//     if (connectButton.innerText === CONECT_STATE) {
-//         console.log("Dispositivo desconectado")
+    if (connectButton.innerText === CONECT_STATE) {
+        console.log("Dispositivo Conectado")
 
-//         SerialPort.list().then((deviceList) => {
-//             console.log(deviceList.length)
-//             deviceList.forEach((Device) => {
-//                 console.log(Device)
-//             })
-//         })
-//     }
-//     if (connectButton.innerText === DISCONNECT_STATE) {
-//         console.log("Dispositivo Conectado")
-//     }
-// })
-
-// function openPort (path) {
-//     serialPort = new SerialPort(path, portConfigurations)
-//     Parser = new ReadLine({ delimiter: '\r\n' })
-
-//     serialPort.pipe(Parser)
-
-//     serialPort.open(function (error) {
-//         if (error) {
-//             console.log('Error at open port')
-//         }
-//     })
-// }
-
-
-connectButton.addEventListener('click', (event) => {
-
-    SerialPort.list().then((resultSerialPort) => {
-        const serialPortlList = resultSerialPort;
-        serialPortlList.forEach((device) => {
-            if (device.vendorId === VENDOR_ID_ST) {;
-                showTemaple("dashboard1/dashboard1");
-                openPort(device.path);            
-            } else if (device.vendorId === "067B") {
+        SerialPort.list().then((deviceList) => {
+            deviceList.forEach((Device) => {
+                if (Device.vendorId === VENDOR_ID_ST) {
+                    showTemaple("dashboard1/dashboard1");
+                    openPort(Device.path);
+                }
+            })
+            if(deviceList.length <=0 ) {
                 showTemaple("dashboard2/dashboard2");
-                openPort(device.path);
-            }else {
-                showTemaple("dashboard1/dashboard1"); //Plantilla no encontro nigun boton
             }
         })
-        if(serialPortlList.length<=0){
-            showTemaple("dashboard2/dashboard2");
-        }
-    })
-});
+    }
+
+    if (connectButton.innerText === DISCONNECT_STATE) {
+        console.log("Dispositivo Deconectado")
+        
+        serialPort.close(function (error) {
+            if (error) console.log(error.message)
+            changeStatusConnectButton()
+        })
+    }
+})
+
+// connectButton.addEventListener('click', (event) => {
+
+//     SerialPort.list().then((resultSerialPort) => {
+//         const serialPortlList = resultSerialPort;
+//         serialPortlList.forEach((device) => {
+//             if (device.vendorId === VENDOR_ID_ST) {;
+//                 showTemaple("dashboard1/dashboard1");
+//                 openPort(device.path);            
+//             } else if (device.vendorId === "067B") {
+//                 showTemaple("dashboard2/dashboard2");
+//                 openPort(device.path);
+//             }else {
+//                 showTemaple("dashboard1/dashboard1"); //Plantilla no encontro nigun boton
+//             }
+//         })
+//         if(serialPortlList.length<=0){
+//             showTemaple("dashboard2/dashboard2");
+//         }
+//     })
+// });
 
 
 const openPort = (path) => {
 
     serialPort = new SerialPort(path, portConfigurations )
-    Parser = new ReadLine({ delimiter: 'K\r\n' })
+    Parser = new ReadLine({ delimiter: '\r\n' })
 
     serialPort.pipe(Parser)
 
     serialPort.open(function (error) {
         if (error) { return console.log('Error:', error.message) }
-        serialPort.write("String de prueba\n");
     })
 
     // The open event is always emitted
@@ -101,13 +96,19 @@ const openPort = (path) => {
         }else { }
     })
     
+    // Port closing event
     serialPort.on('close', function () {
         console.log('Port Close')
     })
 
+    // 
     Parser.on('data', function (data) {
+        BUFFER.push(data)
         console.log('data:', data)
     })
+};
+
+
 
     // serialPort.on('readable', function (Data) {
     //     BUFFER.push(String.fromCharCode(...serialPort.read()))
@@ -119,4 +120,3 @@ const openPort = (path) => {
     //     console.log('Data2:', data)
     //     BUFFER.push(data)
     // })
-};
