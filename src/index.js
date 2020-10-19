@@ -1,16 +1,31 @@
-const SerialPort = require('serialport')
+const SerialPort = require('serialport');
+const ReadLine = require('@serialport/parser-readline');
 
-let BUFFER = [];
+let BUFFER = [];             /** Incoming data buffer */             
+let serialPort = null;
+let Parser = null;
+
+const VENDOR_ID_ST = '0483'  /** VendorId STMicroelctronics */
+const VENDOR_ID_FT = '0403'  /** VendorId FTDI32 */
+
+const CONECT_STATE = 'Connect'
+const DISCONNECT_STATE = 'Disconnect'
+
+portConfigurations = {
+    autoOpen: false,
+    baudRate: 115200,
+    dataBits:8,
+    stopBits:1,
+    parity:'none'
+}
+
 const connectButton = document.getElementById("connect-button");
-let port = null;
 
-// const CONECT_STATE = "Connect"
-// const DISCONNECT_STATE = "Disconnect"
 
-// function changeStatusConnectButton() {
-//     if (connectButton.innerText === CONECT_STATE) connectButton.innerText = DISCONNECT_STATE;
-//     if (connectButton.innerText === DISCONECT_STATE) connectButton.innerText = CONNECT_STATE;
-// }
+function changeStatusConnectButton() {
+    if (connectButton.innerText == CONECT_STATE) connectButton.innerText = DISCONNECT_STATE;
+    else if (connectButton.innerText == DISCONNECT_STATE) connectButton.innerText = CONECT_STATE;
+}
 
 // connectButton.addEventListener("click", (event) => {
 
@@ -29,25 +44,33 @@ let port = null;
 //     }
 // })
 
+// function openPort (path) {
+//     serialPort = new SerialPort(path, portConfigurations)
+//     Parser = new ReadLine({ delimiter: '\r\n' })
+
+//     serialPort.pipe(Parser)
+
+//     serialPort.open(function (error) {
+//         if (error) {
+//             console.log('Error at open port')
+//         }
+//     })
+// }
+
+
 connectButton.addEventListener('click', (event) => {
-    showTemaple("dashboard1/dashboard1");
 
     SerialPort.list().then((resultSerialPort) => {
         const serialPortlList = resultSerialPort;
         serialPortlList.forEach((device) => {
-            if (device.vendorId === "0403") {
-                device_connected = device;
+            if (device.vendorId === VENDOR_ID_ST) {;
                 showTemaple("dashboard1/dashboard1");
-                openPort(device.path); 
-                connectButton.innerText = "Disconnect"
-                
+                openPort(device.path);            
             } else if (device.vendorId === "067B") {
-                device_connected = device;
                 showTemaple("dashboard2/dashboard2");
                 openPort(device.path);
             }else {
-                //Plantilla no encontro nigun boton
-                showTemaple("dashboard1/dashboard1");
+                showTemaple("dashboard1/dashboard1"); //Plantilla no encontro nigun boton
             }
         })
         if(serialPortlList.length<=0){
@@ -56,37 +79,44 @@ connectButton.addEventListener('click', (event) => {
     })
 });
 
+
 const openPort = (path) => {
-    console.log(path)
-    port = new SerialPort(path, { 
-            autoOpen: false,
-            baudRate: 115200,
-            dataBits:8,
-            stopBits:1,
-            parity:'none',
-         })
-    port.open(function (err) {
-        if (err) {
-            return console.log('Error opening port: ', err.message)
-        }
-    port.write("String de prueba\n");
-    
+
+    serialPort = new SerialPort(path, portConfigurations )
+    Parser = new ReadLine({ delimiter: 'K\r\n' })
+
+    serialPort.pipe(Parser)
+
+    serialPort.open(function (error) {
+        if (error) { return console.log('Error:', error.message) }
+        serialPort.write("String de prueba\n");
     })
+
     // The open event is always emitted
-    port.on('open', function () {
-        console.log(port.isOpen)
-        if(port.isOpen) {
-            document.getElementById("device_connected").setAttribute("value", device_connected.path);
-        }else {
-            
-        }
+    serialPort.on('open', function () {
+        if(serialPort.isOpen) {
+            document.getElementById("device_connected").setAttribute("value", path);
+            console.log('Port Open')
+            changeStatusConnectButton()
+        }else { }
     })
-    port.on('readable', function () {
-         BUFFER.push(String.fromCharCode(...port.read()));
-      })
-      
-      // Switches the port into "flowing mode"
-      port.on('data', function (data) {
-        console.log('Data2:', data)
-      })
+    
+    serialPort.on('close', function () {
+        console.log('Port Close')
+    })
+
+    Parser.on('data', function (data) {
+        console.log('data:', data)
+    })
+
+    // serialPort.on('readable', function (Data) {
+    //     BUFFER.push(String.fromCharCode(...serialPort.read()))
+    //     // console.log('Data:', String.fromCharCode(...serialPort.read()));
+    //     // console.log('Data:', serialPort.read());
+    // })
+    
+    // serialPort.on('data', function (data) {
+    //     console.log('Data2:', data)
+    //     BUFFER.push(data)
+    // })
 };
