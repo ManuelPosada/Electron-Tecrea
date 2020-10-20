@@ -19,8 +19,6 @@ const Analog1RangeMin = document.getElementById("Analog1RangeMin").addEventListe
 });
 
 document.getElementById("AnalogSwitch1").addEventListener("change", (event) => {
-    console.log(event.target.value)
-    console.log(event.target.checked)
     if (!event.target.checked) {
         document.getElementById("Analog1RangeMax").disabled = true;
         document.getElementById("Analog1RangeMin").disabled = true;
@@ -65,19 +63,6 @@ const VolSpan = document.getElementById("VolSpan");
 const VolRange = document.getElementById("VolRange").addEventListener("input", (event) => {
     VolSpan.innerText = event.target.value;
 });
-
-/**
- *  Digital Inputs Selector
-*/
-// document.getElementById("DISwitch").addEventListener("change", (event) => {
-//     if (!event.target.checked) {
-//         document.getElementById("DigitalIn1Select").disabled = true;
-//         document.getElementById("DigitalIn2Select").disabled = true;
-//     } else {
-//         document.getElementById("DigitalIn1Select").disabled = false;
-//         document.getElementById("DigitalIn2Select").disabled = false;
-//     }
-// })
 
 /**
  *  Humidity
@@ -126,56 +111,13 @@ document.getElementById("TempSwitch").addEventListener("change", (event) => {
 })
 
 /**
- *  Sigfox Zone Selector
-*/
-// document.getElementById("ZoneSwitch").addEventListener("change", (event) => {
-//     if (!event.target.checked) {
-//         document.getElementById("ZoneSelect").disabled = true;
-//     } else {
-//         document.getElementById("ZoneSelect").disabled = false;
-//     }
-// })
-
-/**
  *  Led Color Selector
 */
-// const ColorSwitch = document.getElementById("ColorSwitch");
 const pulsations = document.getElementById("pulsations");
 const Color1 = document.getElementById("Color1");
 const Color2 = document.getElementById("Color2");
 const Color3 = document.getElementById("Color3");
 const Cancel = document.getElementById("Cancel");
-
-// ColorSwitch.addEventListener("change", (event) => {
-//     if (!event.target.checked) {
-//         Color1.disabled = true;
-//         Color2.disabled = true;
-//         Color3.disabled = true;
-//         Cancel.disabled = true
-//         pulsations.disabled = true;
-//     } else {
-//         Color1.disabled = false;
-//         pulsations.disabled = false;
-//     }
-//     if ((pulsations.value == 0) && (event.target.checked === true)) {
-//         Cancel.disabled = true;
-//     }
-//     if ((pulsations.value == 1) && (event.target.checked === true)) {
-//         Color2.disabled = true;
-//         Color3.disabled = true;
-//         Cancel.disabled = false;
-//     }
-//     if ((pulsations.value == 2) && (event.target.checked === true)) {
-//         Color2.disabled = false;
-//         Color3.disabled = true;
-//         Cancel.disabled = false;
-//     }
-//     if ((pulsations.value == 3) && (event.target.checked === true)) {
-//         Color2.disabled = false;
-//         Color3.disabled = false;
-//         Cancel.disabled = false;
-//     }
-// })
 
 pulsations.addEventListener("change", (event) => {
     console.log(event.target.value)
@@ -204,28 +146,17 @@ Color1.addEventListener("change", (event) => {
     // Color1.style.background
 })
 
-/**
- * Check cards value from forms
- */
-let contador = 0
 let json = {}
 
+/**
+ * 
+ * @param {*} commandsList 
+ */
 async function sendCommands (commandsList) {
-    // commandsList.forEach((command) => {
-        // contador = contador + 1; 
-        // console.log(contador)
-        // serialPort.write(command);
-    //     setTimeout(() => {
-    //         console.log('Comamdo:', command)
-    //         const response = BUFFER.pop();
-    //         console.log(response);
-    //     },1000)
-    // });
-
     for (const command in commandsList) {
         console.log('Comamdo:', commandsList[command])
         serialPort.write(commandsList[command]);
-        await sleep(1000)
+        await sleep(500)
         BUFFER.pop();
     }
 }
@@ -267,15 +198,17 @@ formDashboard1.addEventListener("submit", (event) => {
     console.log(command.setCommand('HT', { tem: 2, ...json.temperature }, true));
     console.log(command.setCommand('RCZ', json.sigfox_zone, true));
     console.log(command.setCommand('PULSED', json.led_color, true));
-    // console.log(command.setCommand('AXL', { vibr: 1, ...json.vibration }, true));
-    // console.log(command.setCommand('AXL', { Angu: 2, ...json.tilt_angle }, true));
+    console.log(command.setCommand('AXL', { vibr: 1, ...json.vibration }, true));
+    console.log(command.setCommand('AXL', { Angu: 2, ...json.tilt_angle }, true));
     console.log(command.setCommand('SAVE', {}, true));
     sendCommands(command.getBufferedCommands());
     command.clearBufferCommand();
 });
 
-
-document.getElementById("read_from_device").addEventListener("click", () => {
+/**
+ * @brief Event Read From Devive Button
+ */
+document.getElementById('read_from_device').addEventListener('click', () => {
     serialPort.write(command.getReadCommand());
     setTimeout(() => {
         console.log(BUFFER)
@@ -286,7 +219,8 @@ document.getElementById("read_from_device").addEventListener("click", () => {
         setDataToHTML(command.getTime(response));
         setDataToHTML(command.getFlags(response));
         setDataToHTML(command.getADC(response));
-    },3000)
+        setDataToHTML(command.getColor(response));
+    },2000)
 });
 
 const setDataToHTML = (data) => {
@@ -296,7 +230,6 @@ const setDataToHTML = (data) => {
             for (const param in params) {
                 if (params.hasOwnProperty(param)) {
                     const htmlElement = document.getElementById(param);
-                    // debugger
                     if (htmlElement.type == 'checkbox') {
                         htmlElement.checked = Boolean(Number(params[param]));
                         htmlElement.dispatchEvent( new Event("change"));
@@ -314,3 +247,53 @@ const setDataToHTML = (data) => {
 }
 
 
+const get_Mode_btn = document.getElementById('get_Mode_btn');
+const get_id_btn = document.getElementById('get_ID_btn');
+const get_Pac_btn = document.getElementById('get_Pac_btn');
+
+const operation_Mode = document.getElementById('operation_Mode')
+const sigfox_ID = document.getElementById('sigfox_ID')
+const sigfox_Pac = document.getElementById('sigfox_Pac')
+
+get_Mode_btn.addEventListener('click', (event) => {
+
+    serialPort.write(command.getIdDeviceCommand())
+    setTimeout(function () {
+        console.log(BUFFER)
+        if (BUFFER.length > 1) BUFFER.pop()
+        const response = BUFFER.pop();
+        console.log(response);
+
+        switch (response) {
+            case '0':
+                operation_Mode.value = 'Wi-Fi'
+                break;
+            case '1':
+                operation_Mode.value = 'GPS'
+                break;
+        }
+    }, 200)
+})
+
+get_id_btn.addEventListener('click', (event) => {
+    serialPort.write(command.getIdSigfoxCommand())
+    setTimeout(function () {
+        console.log(BUFFER)
+        if (BUFFER.length > 1) BUFFER.pop()
+        const response = BUFFER.pop();
+        console.log(response);
+        sigfox_ID.value = response
+    }, 200)
+})
+
+get_Pac_btn.addEventListener('click', (event) => {
+    serialPort.write(command.getPacSigfoxCommand())
+
+    setTimeout(function () {
+        console.log(BUFFER)
+        if (BUFFER.length > 1) BUFFER.pop()
+        const response = BUFFER.pop();
+        console.log(response);
+        sigfox_Pac.value = response
+    }, 200)
+})

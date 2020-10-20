@@ -9,21 +9,30 @@ export class Command {
         if (buffer) this.bufferCommands.push(command);
     }
 
-    getReadCommand = () => {
-        return 'at+read?\r\n';
+    getBufferedCommands = () => {
+        return this.bufferCommands;
     }
-
-    getSaveCommand = () => {
-        return 'at+save\r\n'
-    }
-
+  
     clearBufferCommand = ( ) => {
         this.bufferCommands = [];
     }
 
-    getBufferedCommands = () => {
-        return this.bufferCommands;
+    getReadCommand = () => {
+        return 'at+read?\r\n';
     }
+
+    getIdSigfoxCommand = () => {
+        return 'at+id?\r\n';
+    }
+
+    getPacSigfoxCommand = () => {
+        return 'at+pac?\r\n';
+    }
+
+    getIdDeviceCommand = () => {
+        return 'at+iddev?\r\n';
+    }
+
 
     setCommand = (command, params = {}, buffer = false) => {
         let command_string = `${this.prefix}+${command}=`;

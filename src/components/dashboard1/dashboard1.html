@@ -10,26 +10,26 @@
                     <div class="card-body">
                         <div class="form-row">
                             <div class="col-sm-5">
-                                <input class="form-control form-control-sm mb-1" type="text" placeholder="Operation Mode">
+                                <input class="form-control form-control-sm mb-1" type="text" id="operation_Mode" placeholder="Operation Mode">
                             </div>
                             <div class="col-sm-4">
-                                <button type="button" class="btn btn-primary btn-get btn-sm" >Get Mode</button>
+                                <button type="button" class="btn btn-primary btn-get btn-sm" id="get_Mode_btn">Get Mode</button>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-sm-5">
-                                <input class="form-control form-control-sm mb-1" type="text" placeholder="SigFox Id">
+                                <input class="form-control form-control-sm mb-1" type="text" id="sigfox_ID" placeholder="SigFox Id">
                             </div>
                             <div class="col-sm-4">
-                                <button type="button" class="btn btn-primary btn-get btn-sm">Get ID</button>
+                                <button type="button" class="btn btn-primary btn-get btn-sm" id="get_ID_btn">Get ID</button>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-sm-5">
-                                <input class="form-control form-control-sm mb-1" type="text" placeholder="Sigfox PAC">
+                                <input class="form-control form-control-sm mb-1" type="text" id="sigfox_Pac" placeholder="Sigfox PAC">
                             </div>
                             <div class="col-sm-4">
-                                <button type="button" class="btn btn-primary btn-get btn-sm">Get PAC</button>
+                                <button type="button" class="btn btn-primary btn-get btn-sm" id="get_Pac_btn">Get PAC</button>
                             </div>
                         </div>
                     </div> 
@@ -123,15 +123,15 @@
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="Analog1RangeMax" class="col-form-label-sm col-sm-2">Max</label>
-                                    <input type="range" class="form-control-range" name="Analog1RangeMax" id="Analog1RangeMax" step="1" min="0" max="4096" value="2048" disabled group="analog_input_1">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog1spanMax" id="Analog1spanMax">2048</span>
+                                    <input type="range" class="form-control-range" name="Analog1RangeMax" id="Analog1RangeMax" step="1" min="0" max="4096" value="4096" disabled group="analog_input_1">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog1spanMax" id="Analog1spanMax">4096</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="Analog1RangeMin" class="col-form-label-sm col-sm-2">Min</label>
-                                    <input type="range" class="form-control-range" name="Analog1RangeMin" id="Analog1RangeMin" step="1" min="0" max="4096" value="2048" disabled group="analog_input_1">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog1spanMin" id="Analog1spanMin">2048</span>
+                                    <input type="range" class="form-control-range" name="Analog1RangeMin" id="Analog1RangeMin" step="1" min="0" max="4096" value="0" disabled group="analog_input_1">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog1spanMin" id="Analog1spanMin">0</span>
                                 </div>
                             </div>
                         </div>
@@ -154,15 +154,15 @@
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="Analog2RangeMax" class="col-form-label-sm col-sm-2">Max</label>
-                                    <input type="range" class="form-control-range" name="Analog2RangeMax" id="Analog2RangeMax" step="1" max="4096" value="2048" disabled group="analog_input_2">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog2spanMax" id="Analog2spanMax">2048</span>
+                                    <input type="range" class="form-control-range" name="Analog2RangeMax" id="Analog2RangeMax" step="1" max="4096" value="4096" disabled group="analog_input_2">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog2spanMax" id="Analog2spanMax">4096</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="Analog2RangeMin" class="col-form-label-sm col-sm-2">Min</label>
-                                    <input type="range" class="form-control-range" name="Analog2RangeMin" id="Analog2RangeMin" step="1" max="4096" value="2048" disabled group="analog_input_2"> 
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog2spanMin" id="Analog2spanMin">2048</span>
+                                    <input type="range" class="form-control-range" name="Analog2RangeMin" id="Analog2RangeMin" step="1" max="4096" value="0" disabled group="analog_input_2"> 
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog2spanMin" id="Analog2spanMin">0</span>
                                 </div>
                             </div>
                         </div>
@@ -221,6 +221,7 @@
                                 <div class="form-group col-sm-6">
                                     <label for="DigitalIn1Select" class="col-form-label-sm">Digital Input 1</label>
                                     <select class="form-control form-control-sm" name="DigitalIn1Select" id="DigitalIn1Select" group="digital_input_options">
+                                        <option value="0">Disabled</option>
                                         <option value="1">Rising Edge</option>
                                         <option value="2">Falling Edge</option>
                                         <option value="3">Both</option>
@@ -229,6 +230,7 @@
                                 <div class="form-group col-sm-6">
                                     <label for="DigitalIn2Select" class="col-form-label-sm">Digital Input 2</label>
                                     <select class="form-control form-control-sm" name="DigitalIn2Select" id="DigitalIn2Select" group="digital_input_options">
+                                        <option value="0">Disabled</option>
                                         <option value="1">Rising Edge</option>
                                         <option value="2">Falling Edge</option>
                                         <option value="3">Both</option>
@@ -255,15 +257,15 @@
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="HumidityRangeMax" class="col-form-label-sm col-sm-2">Max</label>
-                                    <input type="range" class="form-control-range" name="HumidityRangeMax" id="HumidityRangeMax" step="1" max="100" value="50" disabled group="humidity">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="HumidityspanMax" id="HumidityspanMax">50</span>
+                                    <input type="range" class="form-control-range" name="HumidityRangeMax" id="HumidityRangeMax" step="1" max="100" value="100" disabled group="humidity">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="HumidityspanMax" id="HumidityspanMax">100</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="HumidityRangeMin" class="col-form-label-sm col-sm-2">Min</label>
-                                    <input type="range" class="form-control-range" name="HumidityRangeMin" id="HumidityRangeMin" step="1" max="100" value="50" disabled group="humidity">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="HumidityspanMin" id="HumidityspanMin">50</span>
+                                    <input type="range" class="form-control-range" name="HumidityRangeMin" id="HumidityRangeMin" step="1" max="100" value="0" disabled group="humidity">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="HumidityspanMin" id="HumidityspanMin">0</span>
                                 </div>
                             </div>
                         </div>
@@ -286,15 +288,15 @@
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="TempRangeMax" class="col-form-label-sm col-sm-2">Max</label>
-                                    <input type="range" class="form-control-range" name="TempRangeMax" id="TempRangeMax" step="1" max="125" min="-40" value="0" disabled group="temperature">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="TempSpanMax" id="TempSpanMax">0</span>
+                                    <input type="range" class="form-control-range" name="TempRangeMax" id="TempRangeMax" step="1" max="125" min="-40" value="125" disabled group="temperature">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="TempSpanMax" id="TempSpanMax">125</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="TempRangeMin" class="col-form-label-sm col-sm-2">Min</label>
-                                    <input type="range" class="form-control-range" name="TempRangeMin" id="TempRangeMin" step="1" max="125" min="-40" value="0" disabled group="temperature">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="TempSpanMin" id="TempSpanMin">0</span>
+                                    <input type="range" class="form-control-range" name="TempRangeMin" id="TempRangeMin" step="1" max="125" min="-40" value="-40" disabled group="temperature">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="TempSpanMin" id="TempSpanMin">-40</span>
                                 </div>
                             </div>
                         </div>
@@ -352,53 +354,57 @@
                                 <div class="form-group col-sm-3">
                                     <label for="Color1"  class="col-form-label-sm"> Color 1</label>
                                     <select class="form-control form-control-sm" name="ColorSelect1" id="Color1" group="led_color">
-                                        <option style="background-color: #000000; " value="1"></option>
-                                        <option style="background-color: #0000ff; " value="2"></option>
-                                        <option style="background-color: #00ff00; " value="3"></option>
-                                        <option style="background-color: #00ffff; " value="4"></option>
-                                        <option style="background-color: #ff0000; " value="5"></option>
-                                        <option style="background-color: #ff00ff; " value="6"></option>
-                                        <option style="background-color: #ffff00; " value="7"></option>
-                                        <option style="background-color: #ffffff; " value="8"></option>
+                                        <option style="background-color: gray; " value="1234"></option>
+                                        <option style="background-color: #000000; " value="0"></option>
+                                        <option style="background-color: #0000ff; " value="1"></option>
+                                        <option style="background-color: #00ff00; " value="2"></option>
+                                        <option style="background-color: #00ffff; " value="3"></option>
+                                        <option style="background-color: #ff0000; " value="4"></option>
+                                        <option style="background-color: #ff00ff; " value="5"></option>
+                                        <option style="background-color: #ffff00; " value="6"></option>
+                                        <option style="background-color: #ffffff; " value="7"></option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label for="Color2" class="col-form-label-sm">Color 2</label>
                                     <select class="form-control form-control-sm" name="ColorSelect2" id="Color2" disabled group="led_color">
-                                        <option style="background-color: #000000;"value="1"></option>
-                                        <option style="background-color: #0000ff;"value="2"></option>
-                                        <option style="background-color: #00ff00;"value="3"></option>
-                                        <option style="background-color: #00ffff;"value="4"></option>
-                                        <option style="background-color: #ff0000;"value="5"></option>
-                                        <option style="background-color: #ff00ff;"value="6"></option>
-                                        <option style="background-color: #ffff00;"value="7"></option>
-                                        <option style="background-color: #ffffff;"value="8"></option>
+                                        <option style="background-color: gray; " value="1234"></option>
+                                        <option style="background-color: #000000; " value="0"></option>
+                                        <option style="background-color: #0000ff; " value="1"></option>
+                                        <option style="background-color: #00ff00; " value="2"></option>
+                                        <option style="background-color: #00ffff; " value="3"></option>
+                                        <option style="background-color: #ff0000; " value="4"></option>
+                                        <option style="background-color: #ff00ff; " value="5"></option>
+                                        <option style="background-color: #ffff00; " value="6"></option>
+                                        <option style="background-color: #ffffff; " value="7"></option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label for="Color3" class="col-form-label-sm">Color 3</label>
                                     <select class="form-control form-control-sm" name="ColorSelect3" id="Color3" disabled group="led_color">
-                                        <option style="background-color: #000000;"value="1"></option>
-                                        <option style="background-color: #0000ff;"value="2"></option>
-                                        <option style="background-color: #00ff00;"value="3"></option>
-                                        <option style="background-color: #00ffff;"value="4"></option>
-                                        <option style="background-color: #ff0000;"value="5"></option>
-                                        <option style="background-color: #ff00ff;"value="6"></option>
-                                        <option style="background-color: #ffff00;"value="7"></option>
-                                        <option style="background-color: #ffffff;"value="8"></option>
+                                        <option style="background-color: gray; " value="1234"></option>
+                                        <option style="background-color: #000000; " value="0"></option>
+                                        <option style="background-color: #0000ff; " value="1"></option>
+                                        <option style="background-color: #00ff00; " value="2"></option>
+                                        <option style="background-color: #00ffff; " value="3"></option>
+                                        <option style="background-color: #ff0000; " value="4"></option>
+                                        <option style="background-color: #ff00ff; " value="5"></option>
+                                        <option style="background-color: #ffff00; " value="6"></option>
+                                        <option style="background-color: #ffffff; " value="7"></option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label for="Cancel" class="col-form-label-sm">Cancel</label>
                                     <select class="form-control form-control-sm" name="ColorSelectCancel" id="Cancel" disabled group="led_color">
-                                        <option style="background-color: #000000;"value="1"></option>
-                                        <option style="background-color: #0000ff;"value="2"></option>
-                                        <option style="background-color: #00ff00;"value="3"></option>
-                                        <option style="background-color: #00ffff;"value="4"></option>
-                                        <option style="background-color: #ff0000;"value="5"></option>
-                                        <option style="background-color: #ff00ff;"value="6"></option>
-                                        <option style="background-color: #ffff00;"value="7"></option>
-                                        <option style="background-color: #ffffff;"value="8"></option>
+                                        <option style="background-color: gray; " value="1234"></option>
+                                        <option style="background-color: #000000; " value="0"></option>
+                                        <option style="background-color: #0000ff; " value="1"></option>
+                                        <option style="background-color: #00ff00; " value="2"></option>
+                                        <option style="background-color: #00ffff; " value="3"></option>
+                                        <option style="background-color: #ff0000; " value="4"></option>
+                                        <option style="background-color: #ff00ff; " value="5"></option>
+                                        <option style="background-color: #ffff00; " value="6"></option>
+                                        <option style="background-color: #ffffff; " value="7"></option>
                                     </select>
                                 </div>
                             </div>                        
@@ -422,15 +428,15 @@
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="VibrationRangeMax" class="col-form-label-sm col-sm-2">Max</label>
-                                    <input type="range" class="form-control-range" name="VibrationRangeMax" id="VibrationRangeMax" step="1" max="100" value="50" disabled group="vibration">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VibrationSpanMax" id="VibrationSpanMax">50</span>
+                                    <input type="range" class="form-control-range" name="VibrationRangeMax" id="VibrationRangeMax" step="1" max="100" value="100" disabled group="vibration">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VibrationSpanMax" id="VibrationSpanMax">100</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="VibrationRangeMin" class="col-form-label-sm col-sm-2">Min</label>
-                                    <input type="range" class="form-control-range" name="VibrationRangeMin" id="VibrationRangeMin" step="1" max="100" value="50" disabled group="vibration">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VibrationSpanMin" id="VibrationSpanMin">50</span>
+                                    <input type="range" class="form-control-range" name="VibrationRangeMin" id="VibrationRangeMin" step="1" max="100" value="0" disabled group="vibration">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VibrationSpanMin" id="VibrationSpanMin">0</span>
                                 </div>
                             </div>
                         </div>
@@ -453,15 +459,15 @@
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="AngleRangeMax" class="col-form-label-sm col-sm-2">Max</label>
-                                    <input type="range" class="form-control-range" name="AngleRangeMax" id="AngleRangeMax" step="1" max="360" value="90" disabled group="tilt_angle">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="AngleSpanMax" id="AngleSpanMax">90</span>
+                                    <input type="range" class="form-control-range" name="AngleRangeMax" id="AngleRangeMax" step="1" max="360" value="360" disabled group="tilt_angle">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="AngleSpanMax" id="AngleSpanMax">360</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="AngleRangeMin" class="col-form-label-sm col-sm-2">Min</label>
-                                    <input type="range" class="form-control-range" name="AngleRangeMin" id="AngleRangeMin" step="1" max="360" value="90" disabled group="tilt_angle">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="AngleSpanMin" id="AngleSpanMin">90</span>
+                                    <input type="range" class="form-control-range" name="AngleRangeMin" id="AngleRangeMin" step="1" max="360" value="0" disabled group="tilt_angle">
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="AngleSpanMin" id="AngleSpanMin">0</span>
                                 </div>
                             </div>
                         </div>

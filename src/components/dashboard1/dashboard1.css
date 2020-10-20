@@ -61,4 +61,6 @@ label {
     font-weight: 600;
     font-size: 0.9rem;
     height: 25px;
+    background-color: #00135b;
+    border-color: #00135b;
 }
