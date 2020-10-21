@@ -146,6 +146,48 @@ Color1.addEventListener("change", (event) => {
     // Color1.style.background
 })
 
+
+const AngleSwitch = document.getElementById('AngleSwitch')
+const AngleRangeX_Max = document.getElementById('AngleRangeX-Max')
+const AngleRangeX_Min = document.getElementById('AngleRangeX-Min')
+const AngleRangeY_Max = document.getElementById('AngleRangeY-Max')
+const AngleRangeY_Min = document.getElementById('AngleRangeY-Min')
+
+const AngleSpanX_Max = document.getElementById('AngleSpanX-Max')
+const AngleSpanX_Min = document.getElementById('AngleSpanX-Min')
+const AngleSpanY_Max = document.getElementById('AngleSpanY-Max')
+const AngleSpanY_Min = document.getElementById('AngleSpanY-Min')
+
+AngleRangeX_Max.addEventListener('input', (event) => {
+    AngleSpanX_Max.innerText = event.target.value;
+})
+
+AngleRangeX_Min.addEventListener('input', (event) => {
+    AngleSpanX_Min.innerText = event.target.value;
+})
+
+AngleRangeY_Max.addEventListener('input', (event) => {
+    AngleSpanY_Max.innerText = event.target.value;
+})
+
+AngleRangeY_Min.addEventListener('input', (event) => {
+    AngleSpanY_Min.innerText = event.target.value;
+})
+
+AngleSwitch.addEventListener('change', (event) => {
+    if (!event.target.checked) {
+        AngleRangeX_Max.disabled = true;
+        AngleRangeX_Min.disabled = true;
+        AngleRangeY_Max.disabled = true;
+        AngleRangeY_Min.disabled = true;
+    } else {
+        AngleRangeX_Max.disabled = false;
+        AngleRangeX_Min.disabled = false;
+        AngleRangeY_Max.disabled = false;
+        AngleRangeY_Min.disabled = false;
+    }
+})
+
 let json = {}
 
 /**
@@ -215,12 +257,12 @@ document.getElementById('read_from_device').addEventListener('click', () => {
         if (BUFFER.length > 1) BUFFER.pop()
         const response = BUFFER.pop();
         console.log(response);
-        setDataToHTML(command.getHumidity(response));
-        setDataToHTML(command.getTime(response));
+        // setDataToHTML(command.getHumidity(response));
+        // setDataToHTML(command.getTime(response));
         setDataToHTML(command.getFlags(response));
         setDataToHTML(command.getADC(response));
         setDataToHTML(command.getColor(response));
-    },2000)
+    },1000)
 });
 
 const setDataToHTML = (data) => {
@@ -247,6 +289,9 @@ const setDataToHTML = (data) => {
 }
 
 
+const WiFiSwitch = document.getElementById('WiFiSwitch')
+const gpsSwitch = document.getElementById('gpsSwitch')
+
 const get_Mode_btn = document.getElementById('get_Mode_btn');
 const get_id_btn = document.getElementById('get_ID_btn');
 const get_Pac_btn = document.getElementById('get_Pac_btn');
@@ -267,9 +312,13 @@ get_Mode_btn.addEventListener('click', (event) => {
         switch (response) {
             case '0':
                 operation_Mode.value = 'Wi-Fi'
+                WiFiSwitch.disabled = false;
+                gpsSwitch.disabled = true;
                 break;
             case '1':
                 operation_Mode.value = 'GPS'
+                WiFiSwitch.disabled = true;
+                gpsSwitch.disabled = false;
                 break;
         }
     }, 200)

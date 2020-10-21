@@ -93,18 +93,19 @@ export class Command {
         const flags = cadena.split('FLAGS=')[1].split('TIME')[0].split(',');
         return {
             flags: {
-                // SocRange: flags[0],
-                gpsSwitch: flags[1],
-                WiFiSwitch: flags[2],
-                AlwaysReportSwitch: flags[3],
-                RedundantMsnSwitch: flags[4],
-                DownLinkSwitch: flags[5],
-                // KeepAlive: flags[6],
-                // pulsation: flags[7],
-                OnlySendSwitch: flags[8],
-                // idDivice: flags[9],
-                // DoCtrl: flags[10],
-                // ZoneSelect: flags[11]
+                SocRange: flags[0],
+                VolRange: flags[1],
+                gpsSwitch: flags[2],
+                WiFiSwitch: flags[3],
+                AlwaysReportSwitch: flags[4],
+                RedundantMsnSwitch: flags[5],
+                DownLinkSwitch: flags[6],
+                keepAlive: flags[7],
+                pulsations: flags[8],
+                OnlySendSwitch: flags[9],
+                // idDivice: flags[10],
+                // DoCtrl: flags[11],
+                // ZoneSelect: flags[12]
             }
         }
 
