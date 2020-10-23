@@ -59,15 +59,15 @@
                                 </div>
                                 <div class="form-group col-sm-4">
                                     <label for="Segundos" class="col-form-label-sm">Segundos</label>
-                                    <input type="number" class="form-control form-control-sm" name="Segundos" id="Segundos" min="0" max="59" placeholder="0" value="0" group="time_transmition">
+                                    <input type="number" class="form-control form-control-sm" name="Segundos" id="Segundos" min="0" max="60" placeholder="0" value="0" group="time_transmition">
                                 </div>
                                 <div class="form-group col-sm-5">
                                     <label for="keepAlive" class="col-form-label-sm">keep Alive(n)</label>
                                     <input type="number" class="form-control form-control-sm" name="keepAlive" id="keepAlive" min="0" max="59" placeholder="0" value="0" group="keep_alive">
                                 </div>
-                                <div class="form-group col-sm-4">
-                                    <label for="TimeKeep" class="col-form-label-sm">Time</label>
-                                    <input type="text" class="form-control form-control-sm" name="TimeKeep" id="TimeKeep" placeholder="0" disabled>
+                                <div class="form-group col-sm-6">
+                                    <label for="TimeKeep" class="col-form-label-sm">Time d:h:m:s</label>
+                                    <input type="text" class="form-control form-control-sm" name="TimeKeep" id="TimeKeep" placeholder="dd/hh/mm/ss" disabled>
                                 </div>
                             </div>
                         </div>
@@ -124,14 +124,14 @@
                                 <div class="form-row">
                                     <label for="Analog1RangeMax" class="col-form-label-sm col-sm-2">Max</label>
                                     <input type="range" class="form-control-range" name="Analog1RangeMax" id="Analog1RangeMax" step="1" min="0" max="4096" value="4096" disabled group="analog_input_1">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog1spanMax" id="Analog1spanMax">4096</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="Analog1spanMax" id="Analog1spanMax" style="background-color: #6c757d; color: #fff;">4096</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="Analog1RangeMin" class="col-form-label-sm col-sm-2">Min</label>
                                     <input type="range" class="form-control-range" name="Analog1RangeMin" id="Analog1RangeMin" step="1" min="0" max="4096" value="0" disabled group="analog_input_1">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog1spanMin" id="Analog1spanMin">0</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="Analog1spanMin" id="Analog1spanMin" style="background-color: #6c757d;  color: #fff;">0</span>
                                 </div>
                             </div>
                         </div>
@@ -155,14 +155,14 @@
                                 <div class="form-row">
                                     <label for="Analog2RangeMax" class="col-form-label-sm col-sm-2">Max</label>
                                     <input type="range" class="form-control-range" name="Analog2RangeMax" id="Analog2RangeMax" step="1" max="4096" value="4096" disabled group="analog_input_2">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog2spanMax" id="Analog2spanMax">4096</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="Analog2spanMax" id="Analog2spanMax" style="background-color: #6c757d; color: #fff;">4096</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="Analog2RangeMin" class="col-form-label-sm col-sm-2">Min</label>
                                     <input type="range" class="form-control-range" name="Analog2RangeMin" id="Analog2RangeMin" step="1" max="4096" value="0" disabled group="analog_input_2"> 
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="Analog2spanMin" id="Analog2spanMin">0</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="Analog2spanMin" id="Analog2spanMin" style="background-color: #6c757d; color: #fff;">0</span>
                                 </div>
                             </div>
                         </div>
@@ -258,14 +258,14 @@
                                 <div class="form-row">
                                     <label for="HumidityRangeMax" class="col-form-label-sm col-sm-2">Max</label>
                                     <input type="range" class="form-control-range" name="HumidityRangeMax" id="HumidityRangeMax" step="1" max="100" value="100" disabled group="humidity">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="HumidityspanMax" id="HumidityspanMax">100</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="HumidityspanMax" id="HumidityspanMax" style="background-color: #6c757d; color: #fff;">100</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="HumidityRangeMin" class="col-form-label-sm col-sm-2">Min</label>
                                     <input type="range" class="form-control-range" name="HumidityRangeMin" id="HumidityRangeMin" step="1" max="100" value="0" disabled group="humidity">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="HumidityspanMin" id="HumidityspanMin">0</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="HumidityspanMin" id="HumidityspanMin" style="background-color: #6c757d; color: #fff;">0</span>
                                 </div>
                             </div>
                         </div>
@@ -289,14 +289,14 @@
                                 <div class="form-row">
                                     <label for="TempRangeMax" class="col-form-label-sm col-sm-2">Max</label>
                                     <input type="range" class="form-control-range" name="TempRangeMax" id="TempRangeMax" step="1" max="125" min="-40" value="125" disabled group="temperature">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="TempSpanMax" id="TempSpanMax">125</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="TempSpanMax" id="TempSpanMax" style="background-color: #6c757d; color: #fff;">125</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="TempRangeMin" class="col-form-label-sm col-sm-2">Min</label>
                                     <input type="range" class="form-control-range" name="TempRangeMin" id="TempRangeMin" step="1" max="125" min="-40" value="-40" disabled group="temperature">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="TempSpanMin" id="TempSpanMin">-40</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="TempSpanMin" id="TempSpanMin" style="background-color: #6c757d; color: #fff;">-40</span>
                                 </div>
                             </div>
                         </div>
@@ -429,7 +429,7 @@
                                 <div class="form-row">
                                     <label for="VibrationRangeMax" class="col-form-label-sm col-sm-2">Max</label>
                                     <input type="range" class="form-control-range" name="VibrationRangeMax" id="VibrationRangeMax" step="1" max="100" value="100" disabled group="vibration">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VibrationSpanMax" id="VibrationSpanMax">100</span>
+                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VibrationSpanMax" id="VibrationSpanMax" style="background-color: #6c757d; color: #fff;">100</span>
                                 </div>
                             </div>
 
@@ -437,7 +437,7 @@
                                 <div class="form-row">
                                     <label for="VibrationRangeMed" class="col-form-label-sm col-sm-2">Med</label>
                                     <input type="range" class="form-control-range" name="VibrationRangeMed" id="VibrationRangeMed" step="1" max="100" value="50" disabled group="vibration">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VibrationRangeMed" id="VibrationRangeMed">50</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="VibrationspanMed" id="VibrationSpanMed" style="background-color: #6c757d; color: #fff;">50</span>
                                 </div>
                             </div>
 
@@ -445,7 +445,7 @@
                                 <div class="form-row">
                                     <label for="VibrationRangeMin" class="col-form-label-sm col-sm-2">Min</label>
                                     <input type="range" class="form-control-range" name="VibrationRangeMin" id="VibrationRangeMin" step="1" max="100" value="0" disabled group="vibration">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="VibrationSpanMin" id="VibrationSpanMin">0</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="VibrationSpanMin" id="VibrationSpanMin" style="background-color: #6c757d; color: #fff;">0</span>
                                 </div>
                             </div>
                         </div>
@@ -469,14 +469,14 @@
                                 <div class="form-row">
                                     <label for="AngleRangeX-Max" class="col-form-label-sm col-sm-3">X-Max</label>
                                     <input type="range" class="form-control-range" name="AngleRangeX-Max" id="AngleRangeX-Max" step="1" max="360" value="360" disabled group="tilt_angle">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="AngleSpanX-Max" id="AngleSpanX-Max">360</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="AngleSpanX-Max" id="AngleSpanX-Max" style="background-color: #6c757d; color: #fff;">360</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
                                     <label for="AngleRangeMin" class="col-form-label-sm col-sm-3">X-Min</label>
                                     <input type="range" class="form-control-range" name="AngleRangeMin" id="AngleRangeX-Min" step="1" max="360" value="0" disabled group="tilt_angle">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="AngleSpanX-Min" id="AngleSpanX-Min">0</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="AngleSpanX-Min" id="AngleSpanX-Min" style="background-color: #6c757d; color: #fff;">0</span>
                                 </div>
                             </div>
 
@@ -484,7 +484,7 @@
                                 <div class="form-row">
                                     <label for="AngleRangeY-Max" class="col-form-label-sm col-sm-3">Y-Max</label>
                                     <input type="range" class="form-control-range" name="AngleRangeY-Max" id="AngleRangeY-Max" step="1" max="360" value="360" disabled group="tilt_angle">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="AngleSpanY-Max" id="AngleSpanY-Max">360</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="AngleSpanY-Max" id="AngleSpanY-Max" style="background-color: #6c757d; color: #fff;">360</span>
                                 </div>
                             </div>
 
@@ -492,7 +492,7 @@
                                 <div class="form-row">
                                     <label for="AngleRangeY-Min" class="col-form-label-sm col-sm-3">Y-Min</label>
                                     <input type="range" class="form-control-range" name="AngleRangeY-Min" id="AngleRangeY-Min" step="1" max="360" value="0" disabled group="tilt_angle">
-                                    <span class="badge badge-secondary col-sm-2 offset-sm-1 mb-2" name="AngleSpanY-Min" id="AngleSpanY-Min">0</span>
+                                    <span class="badge col-sm-2 offset-sm-1 mb-2" name="AngleSpanY-Min" id="AngleSpanY-Min" style="background-color: #6c757d; color: #fff;">0</span>
                                 </div>
                             </div>
 
@@ -506,11 +506,16 @@
                 <!-- <input id="dashboard1-submit" type="submit"> </input> -->
                 <div class="col-sm-6 mb-4">
                     <button type="submit" class="btn btn-outline-primary btn-Download_Read col" id="DownLoad">DownLoad</button>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                      </div>
                 </div>
                 <div class="col-sm-6">
                     <button type="button" class="btn btn-outline-secondary btn-Download_Read col" id="read_from_device">Read From Device</button>
                 </div>
             </div>
+
+
         </form>
     </div>
 

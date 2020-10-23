@@ -1,11 +1,63 @@
 const { protocol, ipcMain } = require("electron");
 import { Command } from "../commands.js"
 
+function timetoSeconds (horas, minutos, segundos) {
+    return (horas*3600)+(minutos*60)+segundos;
+}
+
+function secondstoDate(timeOnSeconds) {
+    let dais, hours, minutes, seconds;
+
+    if(timeOnSeconds >= 84600) dais = Math.floor(timeOnSeconds/86400); else dais = 0;
+    if(timeOnSeconds >= 3600 ) hours = Math.floor((timeOnSeconds-(dais*86400))/3600); else hours = 0;
+    if(timeOnSeconds >= 60) minutes = Math.floor(((timeOnSeconds-((dais*86400)+(hours*3600)))/60)); else minutes = 0;
+    seconds = timeOnSeconds - ((dais*86400)+(hours*3600)+(minutes*60))
+
+    console.log('Dias:',dais);
+    console.log('Horas:',hours);
+    console.log('Minutos:',minutes);
+    console.log('Segundos',seconds);
+
+    return dais + ':' + hours+ ':' + minutes + ':' + seconds;
+}
+
+/**
+ * Time and keep alive
+ */
+const horasField = document.getElementById('Horas');
+const minutField = document.getElementById('Minutos');
+const seconField = document.getElementById('Segundos');
+const keepAField = document.getElementById('keepAlive');
+const keepToTime = document.getElementById('TimeKeep'); 
+
+horasField.addEventListener('input', (event) => {
+    let seconds;
+    seconds = timetoSeconds(Number(event.target.value), Number(minutField.value), Number(seconField.value));
+    keepToTime.value = secondstoDate(seconds*(Number(keepAField.value)));
+});
+
+minutField.addEventListener('input', (event) => {
+    let seconds;
+    seconds = timetoSeconds(Number(horasField.value), Number(event.target.value), Number(seconField.value));
+    keepToTime.value = secondstoDate(seconds*(Number(keepAField.value)));
+});
+
+seconField.addEventListener('input', (event) => {
+    let seconds;
+    seconds = timetoSeconds(Number(horasField.value), Number(minutField.value), Number(event.target.value));
+    keepToTime.value = secondstoDate(seconds*(Number(keepAField.value)));
+});
+
+keepAField.addEventListener('input', (event) => {
+    let seconds;
+    seconds = timetoSeconds(Number(horasField.value), Number(minutField.value), Number(seconField.value));
+    keepToTime.value = secondstoDate(seconds*(Number(event.target.value)));
+});
+
+
 /**
  *   Analog Input 1
 */
-
-
 const formDashboard1 = document.getElementById("form-dashboard1");
 
 const Analog1spanMax = document.getElementById("Analog1spanMax");
@@ -22,11 +74,15 @@ document.getElementById("AnalogSwitch1").addEventListener("change", (event) => {
     if (!event.target.checked) {
         document.getElementById("Analog1RangeMax").disabled = true;
         document.getElementById("Analog1RangeMin").disabled = true;
+        Analog1spanMin.style.backgroundColor = '#6c757d'
+        Analog1spanMax.style.backgroundColor = '#6c757d'
     } else {
         document.getElementById("Analog1RangeMax").disabled = false;
         document.getElementById("Analog1RangeMin").disabled = false;
+        Analog1spanMin.style.backgroundColor = '#007bff'
+        Analog1spanMax.style.backgroundColor = '#007bff'
     }
-})
+});
 
 /** 
  * Analog Input 2
@@ -45,11 +101,15 @@ document.getElementById("AnalogSwitch2").addEventListener("change", (event) => {
     if (!event.target.checked) {
         document.getElementById("Analog2RangeMax").disabled = true;
         document.getElementById("Analog2RangeMin").disabled = true;
+        Analog2spanMin.style.backgroundColor = '#6c757d'
+        Analog2spanMax.style.backgroundColor = '#6c757d'
     } else {
         document.getElementById("Analog2RangeMax").disabled = false;
         document.getElementById("Analog2RangeMin").disabled = false;
+        Analog2spanMin.style.backgroundColor = '#007bff'
+        Analog2spanMax.style.backgroundColor = '#007bff'
     }
-})
+});
 
 /**
  *  Battery
@@ -81,11 +141,15 @@ document.getElementById("HumiditySwitch").addEventListener("change", (event) => 
     if (!event.target.checked) {
         document.getElementById("HumidityRangeMax").disabled = true;
         document.getElementById("HumidityRangeMin").disabled = true;
+        HumidityspanMin.style.backgroundColor = '#6c757d';
+        HumidityspanMax.style.backgroundColor = '#6c757d';
     } else {
         document.getElementById("HumidityRangeMax").disabled = false;
         document.getElementById("HumidityRangeMin").disabled = false;
+        HumidityspanMin.style.backgroundColor = '#007bff';
+        HumidityspanMax.style.backgroundColor = '#007bff';
     }
-})
+});
 
 /**
  *  Temperature
@@ -104,9 +168,13 @@ document.getElementById("TempSwitch").addEventListener("change", (event) => {
     if (!event.target.checked) {
         document.getElementById("TempRangeMax").disabled = true;
         document.getElementById("TempRangeMin").disabled = true;
+        TempspanMin.style.backgroundColor = '#6c757d';
+        TempspanMax.style.backgroundColor = '#6c757d';
     } else {
         document.getElementById("TempRangeMax").disabled = false;
         document.getElementById("TempRangeMin").disabled = false;
+        TempspanMin.style.backgroundColor = '#007bff';
+        TempspanMax.style.backgroundColor = '#007bff';
     }
 })
 
@@ -122,16 +190,16 @@ const Cancel = document.getElementById("Cancel");
 pulsations.addEventListener("change", (event) => {
     console.log(event.target.value)
     if (event.target.value == 0) {
-        Cancel.disabled = true;
+        Cancel.disabled = true;  Cancel.style.backgroundColor = '#e2e4e6'; Cancel.value = '1234';
     }
     if (event.target.value == 1) {
-        Color2.disabled = true;
-        Color3.disabled = true;
-        Cancel.disabled = false;
+        Color2.disabled = true;  Color2.style.backgroundColor = '#e2e4e6'; Color2.value = '1234'; 
+        Color3.disabled = true;  Color3.style.backgroundColor = '#e2e4e6'; Color3.value = '1234';
+        Cancel.disabled = false; Cancel.style.backgroundColor = '#e2e4e6'; Cancel.value = '1234';
     }
     if (event.target.value == 2) {
         Color2.disabled = false;
-        Color3.disabled = true;
+        Color3.disabled = true;  Color3.style.backgroundColor = '#e2e4e6'; Color3.value = '1234';
         Cancel.disabled = false;
     }
     if (event.target.value == 3) {
@@ -143,20 +211,101 @@ pulsations.addEventListener("change", (event) => {
 
 Color1.addEventListener("change", (event) => {
     console.log(event.target.value)
-    // Color1.style.background
+    if(event.target.value === '0') event.target.style.backgroundColor =  '#000000';
+    if(event.target.value === '1') event.target.style.backgroundColor =  '#0000ff';
+    if(event.target.value === '2') event.target.style.backgroundColor =  '#00ff00';
+    if(event.target.value === '3') event.target.style.backgroundColor =  '#00ffff';
+    if(event.target.value === '4') event.target.style.backgroundColor =  '#ff0000';
+    if(event.target.value === '5') event.target.style.backgroundColor =  '#ff00ff';
+    if(event.target.value === '6') event.target.style.backgroundColor =  '#ffff00';
+    if(event.target.value === '7') event.target.style.backgroundColor =  '#ffffff';
+});
+
+Color2.addEventListener("change", (event) => {
+    console.log(event.target.value);
+    if(event.target.value === '0') event.target.style.backgroundColor =  '#000000';
+    if(event.target.value === '1') event.target.style.backgroundColor =  '#0000ff';
+    if(event.target.value === '2') event.target.style.backgroundColor =  '#00ff00';
+    if(event.target.value === '3') event.target.style.backgroundColor =  '#00ffff';
+    if(event.target.value === '4') event.target.style.backgroundColor =  '#ff0000';
+    if(event.target.value === '5') event.target.style.backgroundColor =  '#ff00ff';
+    if(event.target.value === '6') event.target.style.backgroundColor =  '#ffff00';
+    if(event.target.value === '7') event.target.style.backgroundColor =  '#ffffff';
+});
+
+Color3.addEventListener("change", (event) => {
+    console.log(event.target.value);
+    if(event.target.value === '0') event.target.style.backgroundColor =  '#000000';
+    if(event.target.value === '1') event.target.style.backgroundColor =  '#0000ff';
+    if(event.target.value === '2') event.target.style.backgroundColor =  '#00ff00';
+    if(event.target.value === '3') event.target.style.backgroundColor =  '#00ffff';
+    if(event.target.value === '4') event.target.style.backgroundColor =  '#ff0000';
+    if(event.target.value === '5') event.target.style.backgroundColor =  '#ff00ff';
+    if(event.target.value === '6') event.target.style.backgroundColor =  '#ffff00';
+    if(event.target.value === '7') event.target.style.backgroundColor =  '#ffffff';
+})
+
+Cancel.addEventListener("change", (event) => {
+    console.log(event.target.value)
+    if(event.target.value === '0') event.target.style.backgroundColor =  '#000000';
+    if(event.target.value === '1') event.target.style.backgroundColor =  '#0000ff';
+    if(event.target.value === '2') event.target.style.backgroundColor =  '#00ff00';
+    if(event.target.value === '3') event.target.style.backgroundColor =  '#00ffff';
+    if(event.target.value === '4') event.target.style.backgroundColor =  '#ff0000';
+    if(event.target.value === '5') event.target.style.backgroundColor =  '#ff00ff';
+    if(event.target.value === '6') event.target.style.backgroundColor =  '#ffff00';
+    if(event.target.value === '7') event.target.style.backgroundColor =  '#ffffff';
 })
 
 
-const AngleSwitch = document.getElementById('AngleSwitch')
-const AngleRangeX_Max = document.getElementById('AngleRangeX-Max')
-const AngleRangeX_Min = document.getElementById('AngleRangeX-Min')
-const AngleRangeY_Max = document.getElementById('AngleRangeY-Max')
-const AngleRangeY_Min = document.getElementById('AngleRangeY-Min')
+/**
+ * Vibration variables
+ */
+const VibrationSwitch = document.getElementById('VibrationSwitch');
+const VibrationRangeMax = document.getElementById('VibrationRangeMax'); 
+const VibrationRangeMed = document.getElementById('VibrationRangeMed');
+const VibrationRangeMin = document.getElementById('VibrationRangeMin');
 
-const AngleSpanX_Max = document.getElementById('AngleSpanX-Max')
-const AngleSpanX_Min = document.getElementById('AngleSpanX-Min')
-const AngleSpanY_Max = document.getElementById('AngleSpanY-Max')
-const AngleSpanY_Min = document.getElementById('AngleSpanY-Min')
+const VibrationSpanMax = document.getElementById('VibrationSpanMax');
+const VibrationSpanMed = document.getElementById('VibrationSpanMed');
+const VibrationSpanMin = document.getElementById('VibrationSpanMin');
+
+VibrationRangeMax.addEventListener('input', (event) => {
+    VibrationSpanMax.innerText = event.target.value;
+});
+VibrationRangeMed.addEventListener('input', (event) => {
+    VibrationSpanMed.innerText = event.target.value;
+});
+VibrationRangeMin.addEventListener('input', (event) => {
+    VibrationSpanMin.innerText = event.target.value;
+});
+
+VibrationSwitch.addEventListener('change', (event) =>{
+    if (!event.target.checked) {
+        VibrationRangeMax.disabled = true;  VibrationSpanMax.style.backgroundColor = '#6c757d'
+        VibrationRangeMed.disabled = true;  VibrationSpanMed.style.backgroundColor = '#6c757d'
+        VibrationRangeMin.disabled = true;  VibrationSpanMin.style.backgroundColor = '#6c757d'
+
+    } else {
+        VibrationRangeMax.disabled = false; VibrationSpanMax.style.backgroundColor = '#007bff'
+        VibrationRangeMed.disabled = false; VibrationSpanMed.style.backgroundColor = '#007bff'
+        VibrationRangeMin.disabled = false; VibrationSpanMin.style.backgroundColor = '#007bff'
+    }
+});
+
+/** 
+ * Angle variables
+*/
+const AngleSwitch = document.getElementById('AngleSwitch');
+const AngleRangeX_Max = document.getElementById('AngleRangeX-Max');
+const AngleRangeX_Min = document.getElementById('AngleRangeX-Min');
+const AngleRangeY_Max = document.getElementById('AngleRangeY-Max');
+const AngleRangeY_Min = document.getElementById('AngleRangeY-Min');
+
+const AngleSpanX_Max = document.getElementById('AngleSpanX-Max');
+const AngleSpanX_Min = document.getElementById('AngleSpanX-Min');
+const AngleSpanY_Max = document.getElementById('AngleSpanY-Max');
+const AngleSpanY_Min = document.getElementById('AngleSpanY-Min');
 
 AngleRangeX_Max.addEventListener('input', (event) => {
     AngleSpanX_Max.innerText = event.target.value;
@@ -176,22 +325,24 @@ AngleRangeY_Min.addEventListener('input', (event) => {
 
 AngleSwitch.addEventListener('change', (event) => {
     if (!event.target.checked) {
-        AngleRangeX_Max.disabled = true;
-        AngleRangeX_Min.disabled = true;
-        AngleRangeY_Max.disabled = true;
-        AngleRangeY_Min.disabled = true;
+        AngleRangeX_Max.disabled = true; AngleSpanX_Max.style.backgroundColor = '#6c757d'
+        AngleRangeX_Min.disabled = true; AngleSpanX_Min.style.backgroundColor = '#6c757d'
+        AngleRangeY_Max.disabled = true; AngleSpanY_Max.style.backgroundColor = '#6c757d'
+        AngleRangeY_Min.disabled = true; AngleSpanY_Min.style.backgroundColor = '#6c757d'
+
     } else {
-        AngleRangeX_Max.disabled = false;
-        AngleRangeX_Min.disabled = false;
-        AngleRangeY_Max.disabled = false;
-        AngleRangeY_Min.disabled = false;
+        AngleRangeX_Max.disabled = false; AngleSpanX_Max.style.backgroundColor = '#007bff'
+        AngleRangeX_Min.disabled = false; AngleSpanX_Min.style.backgroundColor = '#007bff'
+        AngleRangeY_Max.disabled = false; AngleSpanY_Max.style.backgroundColor = '#007bff'
+        AngleRangeY_Min.disabled = false; AngleSpanY_Min.style.backgroundColor = '#007bff'
     }
-})
+});
+
+
 
 let json = {}
 
 /**
- * 
  * @param {*} commandsList 
  */
 async function sendCommands (commandsList) {
@@ -257,12 +408,13 @@ document.getElementById('read_from_device').addEventListener('click', () => {
         if (BUFFER.length > 1) BUFFER.pop()
         const response = BUFFER.pop();
         console.log(response);
-        // setDataToHTML(command.getHumidity(response));
-        // setDataToHTML(command.getTime(response));
+        setDataToHTML(command.getHumidity(response)); 
+        setDataToHTML(command.getTemperature(response))
+        setDataToHTML(command.getTime(response));
         setDataToHTML(command.getFlags(response));
         setDataToHTML(command.getADC(response));
         setDataToHTML(command.getColor(response));
-    },1000)
+    },500)
 });
 
 const setDataToHTML = (data) => {

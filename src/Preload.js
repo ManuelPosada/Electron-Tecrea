@@ -32,6 +32,7 @@ async function loadHtml(htmlFile) {
 
 loadHtml("dashboard1/dashboard1");
 loadHtml("dashboard2/dashboard2");
+loadHtml("dashboardx/disconnect");
 
 const showTemaple = (component) => {
     const sections = document.querySelector('.section.is-shown')  

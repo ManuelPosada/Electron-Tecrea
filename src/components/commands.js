@@ -54,8 +54,8 @@ export class Command {
             },
             analog_input2: {
                 AnalogSwitch2: adc[3],
-                Analog1RangeMax: adc[4],
-                Analog1RangeMin: adc[5]
+                Analog2RangeMax: adc[4],
+                Analog2RangeMin: adc[5]
             }
         }
     }
@@ -123,10 +123,13 @@ export class Command {
     getAXL = (cadena) => {
         const axl = cadena.split('AXL=')[1].split('COLOR')[0].split(',');
         return {
-            time_transmition: {
-                Horas: axl[0],
-                Minutos: axl[1],
-                Segundos: axl[2]
+            time_axl: {
+                AngleSwitch: axl[0],
+                VibrationSwitch: axl[1],
+                AngleRangeX_Max: axl[2],
+                AngleRangeX_Min: axl[3],
+                AngleRangeY_Max: axl[4],
+                AngleRangeY_Min: axl[4]
             }
         }
     }
@@ -143,7 +146,7 @@ export class Command {
         }
     }
     getDI = (cadena) => {
-        const di = cadena.split('DI=')[1].split('IP')[0].split(',');
+        const di = cadena.split('DI=')[1].split('ID')[0].split(',');
         return {
             digital_input_options: {
                 DigitalIn1Select: di[0],

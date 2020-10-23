@@ -20,6 +20,7 @@ portConfigurations = {
 }
 
 const connectButton = document.getElementById("connect-button");
+const showPortName = document.getElementById("device_connected")
 
 function changeStatusConnectButton() {
     if (connectButton.innerText == CONECT_STATE) connectButton.innerText = DISCONNECT_STATE;
@@ -73,7 +74,7 @@ const openPort = (path) => {
     // The open event is always emitted
     serialPort.on('open', function () {
         if(serialPort.isOpen) {
-            document.getElementById("device_connected").setAttribute("value", path);
+            showPortName.setAttribute("value", path);
             console.log('Port Open')
             changeStatusConnectButton()
         }else { }
@@ -83,6 +84,8 @@ const openPort = (path) => {
     serialPort.on('close', function () {
         console.log('Port Close')
         changeStatusConnectButton()
+        showPortName.setAttribute("value", '');
+        showTemaple('dashboardx/disconnect')
     })
 
     // Incoming data parser event

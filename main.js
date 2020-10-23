@@ -9,11 +9,12 @@ let win;
 
 function createWindow () {
     win = new BrowserWindow({
-        width:  1302,
+        width:  1310,
         height: 800,
         webPreferences: {
             nodeIntegration: true,
-            worldSafeExecuteJavaScript: true
+            worldSafeExecuteJavaScript: true,
+            devTools: true
         }
     })
     win.loadURL(url.format({

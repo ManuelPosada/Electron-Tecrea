@@ -1,33 +1,38 @@
 /* NavMain */
 
-.navMain {
-  width: 300px;
-  height: 100%;
-  /* overflow-x: hidden; */
-  overflow-y: auto;
-  color: var(--color-subtle);
-  border-right: 1px solid var(--color);
-  background-color: #00135b;               /*var(--color-bg);*/
-  background-image: url("../img/fondo.png");
-  background-repeat: no-repeat;
-  /* visibility: hidden; */
-  /* opacity: 0; */
-}
-
 /* clores Tecrea
 Hexadecimal azul: #00135b
 Hexadecimal amarillo claro: #fad13f
 Hexadecimal amarillo oscuro: #f3a000 */
+
+  .navMain {
+    width: 300px;
+    height: 100%;
+    /* overflow-x: hidden; */
+    overflow-y: auto;
+    color: var(--color-subtle);
+    border-right: 1px solid var(--color);
+    background-color: #00135b;               /*var(--color-bg);*/
+    background-image: url("../img/fondo.png");
+    background-repeat: no-repeat;
+    /* visibility: hidden; */
+    /* opacity: 0; */
+  }
+
+  .show-com {
+    margin-left: 15%;
+  }
 
   .navMain.is-shown {
     visibility: visible;;
     opacity: 1;
   }
 
-   .fixed-bottom {
+  .fixed-bottom {
     width: 250px;
     margin-left: 25px;
   } 
+
   .navMain-header {
     position: relative;
     padding: 2rem;
