@@ -188,7 +188,6 @@ const Color3 = document.getElementById("Color3");
 const Cancel = document.getElementById("Cancel");
 
 pulsations.addEventListener("change", (event) => {
-    console.log(event.target.value)
     if (event.target.value == 0) {
         Cancel.disabled = true;  Cancel.style.backgroundColor = '#e2e4e6'; Cancel.value = '1234';
     }
@@ -210,7 +209,6 @@ pulsations.addEventListener("change", (event) => {
 })
 
 Color1.addEventListener("change", (event) => {
-    console.log(event.target.value)
     if(event.target.value === '0') event.target.style.backgroundColor =  '#000000';
     if(event.target.value === '1') event.target.style.backgroundColor =  '#0000ff';
     if(event.target.value === '2') event.target.style.backgroundColor =  '#00ff00';
@@ -222,7 +220,6 @@ Color1.addEventListener("change", (event) => {
 });
 
 Color2.addEventListener("change", (event) => {
-    console.log(event.target.value);
     if(event.target.value === '0') event.target.style.backgroundColor =  '#000000';
     if(event.target.value === '1') event.target.style.backgroundColor =  '#0000ff';
     if(event.target.value === '2') event.target.style.backgroundColor =  '#00ff00';
@@ -234,7 +231,6 @@ Color2.addEventListener("change", (event) => {
 });
 
 Color3.addEventListener("change", (event) => {
-    console.log(event.target.value);
     if(event.target.value === '0') event.target.style.backgroundColor =  '#000000';
     if(event.target.value === '1') event.target.style.backgroundColor =  '#0000ff';
     if(event.target.value === '2') event.target.style.backgroundColor =  '#00ff00';
@@ -246,7 +242,6 @@ Color3.addEventListener("change", (event) => {
 })
 
 Cancel.addEventListener("change", (event) => {
-    console.log(event.target.value)
     if(event.target.value === '0') event.target.style.backgroundColor =  '#000000';
     if(event.target.value === '1') event.target.style.backgroundColor =  '#0000ff';
     if(event.target.value === '2') event.target.style.backgroundColor =  '#00ff00';
@@ -339,7 +334,6 @@ AngleSwitch.addEventListener('change', (event) => {
 });
 
 
-
 let json = {}
 
 /**
@@ -371,7 +365,7 @@ formDashboard1.addEventListener("submit", (event) => {
                 json[input.getAttribute('group')][input.name] = Number(input.checked);
             } else {
                 json[input.getAttribute('group')][input.name] = input.value
-                console.log(input.value);
+                // console.log(input.value);
             }
         }
     });
@@ -386,7 +380,8 @@ formDashboard1.addEventListener("submit", (event) => {
     console.log(command.setCommand('ADC', { channel: 1, ...json.analog_input_1 }, true));
     console.log(command.setCommand('ADC', { channel: 2, ...json.analog_input_2 }, true));
     console.log(command.setCommand('BATT', json.battery_mah, true));
-    console.log(command.setCommand('DI', json.digital_input_options, true));
+    console.log(command.setCommand('DI', { Input1: 1, ...json.digital_input_1}, true));
+    console.log(command.setCommand('DI', { Input2: 2, ...json.digital_input_2}, true));
     console.log(command.setCommand('HT', { hum: 1, ...json.humidity }, true));
     console.log(command.setCommand('HT', { tem: 2, ...json.temperature }, true));
     console.log(command.setCommand('RCZ', json.sigfox_zone, true));
@@ -413,6 +408,7 @@ document.getElementById('read_from_device').addEventListener('click', () => {
         setDataToHTML(command.getTime(response));
         setDataToHTML(command.getFlags(response));
         setDataToHTML(command.getADC(response));
+        setDataToHTML(command.getDI(response));
         setDataToHTML(command.getColor(response));
     },500)
 });

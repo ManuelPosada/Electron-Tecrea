@@ -148,8 +148,10 @@ export class Command {
     getDI = (cadena) => {
         const di = cadena.split('DI=')[1].split('ID')[0].split(',');
         return {
-            digital_input_options: {
-                DigitalIn1Select: di[0],
+            digital_input_1: {
+                DigitalIn1Select: di[0]
+            },
+            digital_input_2: {
                 DigitalIn2Select: di[1]
             }
         }
