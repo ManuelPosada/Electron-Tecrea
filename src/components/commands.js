@@ -105,7 +105,7 @@ export class Command {
                 OnlySendSwitch: flags[9],
                 // idDivice: flags[10],
                 // DoCtrl: flags[11],
-                // ZoneSelect: flags[12]
+                ZoneSelect: flags[12]
             }
         }
 
@@ -125,11 +125,11 @@ export class Command {
         return {
             time_axl: {
                 AngleSwitch: axl[0],
-                VibrationSwitch: axl[1],
-                AngleRangeX_Max: axl[2],
-                AngleRangeX_Min: axl[3],
+                AngleRangeX_Max: axl[1],
+                AngleRangeX_Min: axl[2],
+                VibrationSwitch: axl[3],
                 AngleRangeY_Max: axl[4],
-                AngleRangeY_Min: axl[4]
+                AngleRangeY_Min: axl[5]
             }
         }
     }

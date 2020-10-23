@@ -11,12 +11,7 @@ function secondstoDate(timeOnSeconds) {
     if(timeOnSeconds >= 84600) dais = Math.floor(timeOnSeconds/86400); else dais = 0;
     if(timeOnSeconds >= 3600 ) hours = Math.floor((timeOnSeconds-(dais*86400))/3600); else hours = 0;
     if(timeOnSeconds >= 60) minutes = Math.floor(((timeOnSeconds-((dais*86400)+(hours*3600)))/60)); else minutes = 0;
-    seconds = timeOnSeconds - ((dais*86400)+(hours*3600)+(minutes*60))
-
-    console.log('Dias:',dais);
-    console.log('Horas:',hours);
-    console.log('Minutos:',minutes);
-    console.log('Segundos',seconds);
+    seconds = timeOnSeconds - ((dais*86400)+(hours*3600)+(minutes*60));
 
     return dais + ':' + hours+ ':' + minutes + ':' + seconds;
 }
@@ -54,6 +49,11 @@ keepAField.addEventListener('input', (event) => {
     keepToTime.value = secondstoDate(seconds*(Number(event.target.value)));
 });
 
+keepAField.addEventListener('change', (event) => {
+    let seconds;
+    seconds = timetoSeconds(Number(horasField.value), Number(minutField.value), Number(seconField.value));
+    keepToTime.value = secondstoDate(seconds*(Number(event.target.value)));
+});
 
 /**
  *   Analog Input 1
@@ -188,23 +188,23 @@ const Color3 = document.getElementById("Color3");
 const Cancel = document.getElementById("Cancel");
 
 pulsations.addEventListener("change", (event) => {
-    if (event.target.value == 0) {
-        Cancel.disabled = true;  Cancel.style.backgroundColor = '#e2e4e6'; Cancel.value = '1234';
+    if (event.target.value === '0') {
+        Cancel.disabled = true;  Cancel.style.backgroundColor = '#e2e4e6'; Cancel.value = '0';
     }
-    if (event.target.value == 1) {
-        Color2.disabled = true;  Color2.style.backgroundColor = '#e2e4e6'; Color2.value = '1234'; 
-        Color3.disabled = true;  Color3.style.backgroundColor = '#e2e4e6'; Color3.value = '1234';
-        Cancel.disabled = false; Cancel.style.backgroundColor = '#e2e4e6'; Cancel.value = '1234';
+    if (event.target.value === '1') {
+        Color2.disabled = true;  Color2.style.backgroundColor = '#e2e4e6'; Color2.value = '0'; 
+        Color3.disabled = true;  Color3.style.backgroundColor = '#e2e4e6'; Color3.value = '0';
+        Cancel.disabled = false; Cancel.style.backgroundColor = '#ff00ff'; Cancel.value = '5';
     }
-    if (event.target.value == 2) {
-        Color2.disabled = false;
-        Color3.disabled = true;  Color3.style.backgroundColor = '#e2e4e6'; Color3.value = '1234';
-        Cancel.disabled = false;
+    if (event.target.value === '2') {
+        Color2.disabled = false; Color2.style.backgroundColor = '#00ffff'; Color2.value = '3';
+        Color3.disabled = true;  Color3.style.backgroundColor = '#e2e4e6'; Color3.value = '0';
+        Cancel.disabled = false; Cancel.style.backgroundColor = '#ff00ff'; Cancel.value = '5';
     }
-    if (event.target.value == 3) {
-        Color2.disabled = false;
-        Color3.disabled = false;
-        Cancel.disabled = false;
+    if (event.target.value === '3') {
+        Color2.disabled = false; Color2.style.backgroundColor = '#00ffff'; Color2.value = '3'; 
+        Color3.disabled = false; Color3.style.backgroundColor = '#ff0000'; Color3.value = '4';
+        Cancel.disabled = false; Cancel.style.backgroundColor = '#ff00ff'; Cancel.value = '5';
     }
 })
 
@@ -320,37 +320,53 @@ AngleRangeY_Min.addEventListener('input', (event) => {
 
 AngleSwitch.addEventListener('change', (event) => {
     if (!event.target.checked) {
-        AngleRangeX_Max.disabled = true; AngleSpanX_Max.style.backgroundColor = '#6c757d'
-        AngleRangeX_Min.disabled = true; AngleSpanX_Min.style.backgroundColor = '#6c757d'
-        AngleRangeY_Max.disabled = true; AngleSpanY_Max.style.backgroundColor = '#6c757d'
-        AngleRangeY_Min.disabled = true; AngleSpanY_Min.style.backgroundColor = '#6c757d'
+        AngleRangeX_Max.disabled = true; AngleSpanX_Max.style.backgroundColor = '#6c757d';
+        AngleRangeX_Min.disabled = true; AngleSpanX_Min.style.backgroundColor = '#6c757d';
+        AngleRangeY_Max.disabled = true; AngleSpanY_Max.style.backgroundColor = '#6c757d';
+        AngleRangeY_Min.disabled = true; AngleSpanY_Min.style.backgroundColor = '#6c757d';
 
     } else {
-        AngleRangeX_Max.disabled = false; AngleSpanX_Max.style.backgroundColor = '#007bff'
-        AngleRangeX_Min.disabled = false; AngleSpanX_Min.style.backgroundColor = '#007bff'
-        AngleRangeY_Max.disabled = false; AngleSpanY_Max.style.backgroundColor = '#007bff'
-        AngleRangeY_Min.disabled = false; AngleSpanY_Min.style.backgroundColor = '#007bff'
+        AngleRangeX_Max.disabled = false; AngleSpanX_Max.style.backgroundColor = '#007bff';                                                            
+        AngleRangeX_Min.disabled = false; AngleSpanX_Min.style.backgroundColor = '#007bff';
+        AngleRangeY_Max.disabled = false; AngleSpanY_Max.style.backgroundColor = '#007bff';
+        AngleRangeY_Min.disabled = false; AngleSpanY_Min.style.backgroundColor = '#007bff';
     }
 });
 
 
 let json = {}
+read_from_device
+
+const progressBar = document.getElementById('progress_Bar');
+
 
 /**
  * @param {*} commandsList 
  */
 async function sendCommands (commandsList) {
+
+    let progresAdd = 0;
+    progressBar.style.backgroundColor = '#007bff'
+    await sleep(200);
+
     for (const command in commandsList) {
         console.log('Comamdo:', commandsList[command])
         serialPort.write(commandsList[command]);
-        await sleep(500)
+        await sleep(500);
         BUFFER.pop();
+        progresAdd += 5;
+        console.log(progresAdd + '%');
+        progressBar.style.width = progresAdd + '%';
     }
+    await sleep(500);
+    progressBar.style.backgroundColor = 'rgb(35 185 35)';
 }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+
 
 const command = new Command();
 formDashboard1.addEventListener("submit", (event) => {
@@ -370,6 +386,7 @@ formDashboard1.addEventListener("submit", (event) => {
         }
     });
     console.log(json);
+    console.log(command.setCommand('READ', {value: 1}, true));
     console.log(command.setCommand('TIME', { ...json.keep_alive, ...json.time_transmition }, true));
     console.log(command.setCommand('WIFI', json.wifi_switch, true));
     console.log(command.setCommand('ALWAYS', json.always_report_switch, true));

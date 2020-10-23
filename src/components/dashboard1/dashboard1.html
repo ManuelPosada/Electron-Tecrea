@@ -354,7 +354,6 @@
                                 <div class="form-group col-sm-3">
                                     <label for="Color1"  class="col-form-label-sm"> Color 1</label>
                                     <select class="form-control form-control-sm" name="ColorSelect1" id="Color1" group="led_color">
-                                        <option style="background-color: gray; " value="1234"></option>
                                         <option style="background-color: #000000; " value="0"></option>
                                         <option style="background-color: #0000ff; " value="1"></option>
                                         <option style="background-color: #00ff00; " value="2"></option>
@@ -368,7 +367,6 @@
                                 <div class="form-group col-sm-3">
                                     <label for="Color2" class="col-form-label-sm">Color 2</label>
                                     <select class="form-control form-control-sm" name="ColorSelect2" id="Color2" disabled group="led_color">
-                                        <option style="background-color: gray; " value="1234"></option>
                                         <option style="background-color: #000000; " value="0"></option>
                                         <option style="background-color: #0000ff; " value="1"></option>
                                         <option style="background-color: #00ff00; " value="2"></option>
@@ -382,7 +380,6 @@
                                 <div class="form-group col-sm-3">
                                     <label for="Color3" class="col-form-label-sm">Color 3</label>
                                     <select class="form-control form-control-sm" name="ColorSelect3" id="Color3" disabled group="led_color">
-                                        <option style="background-color: gray; " value="1234"></option>
                                         <option style="background-color: #000000; " value="0"></option>
                                         <option style="background-color: #0000ff; " value="1"></option>
                                         <option style="background-color: #00ff00; " value="2"></option>
@@ -396,7 +393,6 @@
                                 <div class="form-group col-sm-3">
                                     <label for="Cancel" class="col-form-label-sm">Cancel</label>
                                     <select class="form-control form-control-sm" name="ColorSelectCancel" id="Cancel" disabled group="led_color">
-                                        <option style="background-color: gray; " value="1234"></option>
                                         <option style="background-color: #000000; " value="0"></option>
                                         <option style="background-color: #0000ff; " value="1"></option>
                                         <option style="background-color: #00ff00; " value="2"></option>
@@ -507,8 +503,8 @@
                 <div class="col-sm-6 mb-4">
                     <button type="submit" class="btn btn-outline-primary btn-Download_Read col" id="DownLoad">DownLoad</button>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                      </div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="progress_Bar"></div>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <button type="button" class="btn btn-outline-secondary btn-Download_Read col" id="read_from_device">Read From Device</button>
