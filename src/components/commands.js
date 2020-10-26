@@ -173,21 +173,3 @@ export class Command {
         }
     }
 }
-
-
-/*
-const commandGenerator = () => {
-
-    let command = '';
-    let arrayCommands = [];
-    for (section in json) {
-        command = commands[section];
-        for (value in json[section]) {
-            command += json[section][value] + ',';
-        }
-        command = command.slice(0, -1) + "\r\n"
-        arrayCommands.push(command);
-        command = '';
-    }
-    return arrayCommands;
-}*/

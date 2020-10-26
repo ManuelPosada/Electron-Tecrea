@@ -1,20 +1,7 @@
 const { protocol, ipcMain } = require("electron");
-import { Command } from "../commands.js"
 
-function timetoSeconds (horas, minutos, segundos) {
-    return (horas*3600)+(minutos*60)+segundos;
-}
-
-function secondstoDate(timeOnSeconds) {
-    let dais, hours, minutes, seconds;
-
-    if(timeOnSeconds >= 84600) dais = Math.floor(timeOnSeconds/86400); else dais = 0;
-    if(timeOnSeconds >= 3600 ) hours = Math.floor((timeOnSeconds-(dais*86400))/3600); else hours = 0;
-    if(timeOnSeconds >= 60) minutes = Math.floor(((timeOnSeconds-((dais*86400)+(hours*3600)))/60)); else minutes = 0;
-    seconds = timeOnSeconds - ((dais*86400)+(hours*3600)+(minutes*60));
-
-    return dais + ':' + hours+ ':' + minutes + ':' + seconds;
-}
+import { Command } from '../commands.js'
+import * as  time from '../utilities.js'
 
 /**
  * Time and keep alive
@@ -27,32 +14,32 @@ const keepToTime = document.getElementById('TimeKeep');
 
 horasField.addEventListener('input', (event) => {
     let seconds;
-    seconds = timetoSeconds(Number(event.target.value), Number(minutField.value), Number(seconField.value));
-    keepToTime.value = secondstoDate(seconds*(Number(keepAField.value)));
+    seconds = time.timetoSeconds(Number(event.target.value), Number(minutField.value), Number(seconField.value));
+    keepToTime.value = time.secondstoDate(seconds*(Number(keepAField.value)));
 });
 
 minutField.addEventListener('input', (event) => {
     let seconds;
-    seconds = timetoSeconds(Number(horasField.value), Number(event.target.value), Number(seconField.value));
-    keepToTime.value = secondstoDate(seconds*(Number(keepAField.value)));
+    seconds = time.timetoSeconds(Number(horasField.value), Number(event.target.value), Number(seconField.value));
+    keepToTime.value = time.secondstoDate(seconds*(Number(keepAField.value)));
 });
 
 seconField.addEventListener('input', (event) => {
     let seconds;
-    seconds = timetoSeconds(Number(horasField.value), Number(minutField.value), Number(event.target.value));
-    keepToTime.value = secondstoDate(seconds*(Number(keepAField.value)));
+    seconds = time.timetoSeconds(Number(horasField.value), Number(minutField.value), Number(event.target.value));
+    keepToTime.value =time. secondstoDate(seconds*(Number(keepAField.value)));
 });
 
 keepAField.addEventListener('input', (event) => {
     let seconds;
-    seconds = timetoSeconds(Number(horasField.value), Number(minutField.value), Number(seconField.value));
-    keepToTime.value = secondstoDate(seconds*(Number(event.target.value)));
+    seconds = time.timetoSeconds(Number(horasField.value), Number(minutField.value), Number(seconField.value));
+    keepToTime.value = time.secondstoDate(seconds*(Number(event.target.value)));
 });
 
 keepAField.addEventListener('change', (event) => {
     let seconds;
-    seconds = timetoSeconds(Number(horasField.value), Number(minutField.value), Number(seconField.value));
-    keepToTime.value = secondstoDate(seconds*(Number(event.target.value)));
+    seconds = time.timetoSeconds(Number(horasField.value), Number(minutField.value), Number(seconField.value));
+    keepToTime.value = time.secondstoDate(seconds*(Number(event.target.value)));
 });
 
 /**
@@ -333,11 +320,9 @@ AngleSwitch.addEventListener('change', (event) => {
     }
 });
 
-
 let json = {}
 
 const progressBar = document.getElementById('progress_Bar');
-
 
 /**
  * @param {*} commandsList 
@@ -347,25 +332,20 @@ async function sendCommands (commandsList) {
     let progresAdd = 0;
     progressBar.style.backgroundColor = '#007bff'
     progressBar.style.width = '0%'
-    await sleep(200);
+    await time.sleep(200);
 
     for (const command in commandsList) {
         console.log('Comamdo:', commandsList[command])
         serialPort.write(commandsList[command]);
-        await sleep(500);
+        await time.sleep(500);
         BUFFER.pop();
         progresAdd += 5;
         console.log(progresAdd + '%');
         progressBar.style.width = progresAdd + '%';
     }
-    await sleep(500);
+    await time.sleep(500);
     progressBar.style.backgroundColor = 'rgb(35 185 35)';
 }
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 
 
 const command = new Command();
