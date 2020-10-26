@@ -14,7 +14,7 @@ function createWindow () {
         webPreferences: {
             nodeIntegration: true,
             worldSafeExecuteJavaScript: true,
-            devTools: false
+            devTools: true
         }
     })
     win.loadURL(url.format({

@@ -257,7 +257,7 @@ Cancel.addEventListener("change", (event) => {
  * Vibration variables
  */
 const VibrationSwitch = document.getElementById('VibrationSwitch');
-const VibrationRangeMax = document.getElementById('VibrationRangeMax'); 
+const VibrationRangeMax = document.getElementById('VibrationRangeMax');
 const VibrationRangeMed = document.getElementById('VibrationRangeMed');
 const VibrationRangeMin = document.getElementById('VibrationRangeMin');
 
@@ -275,7 +275,7 @@ VibrationRangeMin.addEventListener('input', (event) => {
     VibrationSpanMin.innerText = event.target.value;
 });
 
-VibrationSwitch.addEventListener('change', (event) =>{
+VibrationSwitch.addEventListener('change', (event) => {
     if (!event.target.checked) {
         VibrationRangeMax.disabled = true;  VibrationSpanMax.style.backgroundColor = '#6c757d'
         VibrationRangeMed.disabled = true;  VibrationSpanMed.style.backgroundColor = '#6c757d'
@@ -335,7 +335,6 @@ AngleSwitch.addEventListener('change', (event) => {
 
 
 let json = {}
-read_from_device
 
 const progressBar = document.getElementById('progress_Bar');
 
@@ -347,6 +346,7 @@ async function sendCommands (commandsList) {
 
     let progresAdd = 0;
     progressBar.style.backgroundColor = '#007bff'
+    progressBar.style.width = '0%'
     await sleep(200);
 
     for (const command in commandsList) {
