@@ -20,7 +20,7 @@ portConfigurations = {
 }
 
 const connectButton = document.getElementById("connect-button");
-const showPortName = document.getElementById("device_connected")
+const showPortName = document.getElementById("device_connected");
 
 function changeStatusConnectButton() {
     if (connectButton.innerText == CONECT_STATE) connectButton.innerText = DISCONNECT_STATE;
@@ -34,11 +34,11 @@ connectButton.addEventListener("click", (event) => {
 
         SerialPort.list().then((deviceList) => {
             deviceList.forEach((Device) => {
-                if (Device.vendorId === VENDOR_ID_ST) {
+                if (Device.vendorId === VENDOR_ID_FT) {
                     showTemaple("dashboard1/dashboard1");
                     openPort(Device.path);
                 }
-                else if ( Device.vendorId === VENDOR_ID_FT) {
+                else if ( Device.vendorId === VENDOR_ID_ST) {
                     showTemaple("dashboard2/dashboard2");
                     openPort(Device.path);
                 }
