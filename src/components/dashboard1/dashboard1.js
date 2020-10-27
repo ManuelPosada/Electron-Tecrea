@@ -45,8 +45,6 @@ keepAField.addEventListener('change', (event) => {
 /**
  *   Analog Input 1
 */
-const formDashboard1 = document.getElementById("form-dashboard1");
-
 const Analog1spanMax = document.getElementById("Analog1spanMax");
 const Analog1RangeMax = document.getElementById("Analog1RangeMax").addEventListener("input", (event) => {
     Analog1spanMax.innerText = event.target.value;
@@ -61,13 +59,13 @@ document.getElementById("AnalogSwitch1").addEventListener("change", (event) => {
     if (!event.target.checked) {
         document.getElementById("Analog1RangeMax").disabled = true;
         document.getElementById("Analog1RangeMin").disabled = true;
-        Analog1spanMin.style.backgroundColor = '#6c757d'
-        Analog1spanMax.style.backgroundColor = '#6c757d'
+        Analog1spanMin.style.backgroundColor = '#6c757d';
+        Analog1spanMax.style.backgroundColor = '#6c757d';
     } else {
         document.getElementById("Analog1RangeMax").disabled = false;
         document.getElementById("Analog1RangeMin").disabled = false;
-        Analog1spanMin.style.backgroundColor = '#007bff'
-        Analog1spanMax.style.backgroundColor = '#007bff'
+        Analog1spanMin.style.backgroundColor = '#007bff';
+        Analog1spanMax.style.backgroundColor = '#007bff';
     }
 });
 
@@ -349,6 +347,9 @@ async function sendCommands (commandsList) {
 
 
 const command = new Command();
+
+const formDashboard1 = document.getElementById("form-dashboard1");
+
 formDashboard1.addEventListener("submit", (event) => {
     event.preventDefault();
     const component = event.target;
