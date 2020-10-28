@@ -16,18 +16,19 @@ function createWindow () {
             worldSafeExecuteJavaScript: true,
             devTools: true
         }
-    })
+    });
+
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'src/index.html'),
         protocol: 'file',
         slashes: true
-    }))
+    }));
 
     win.webContents.openDevTools()
 
     win.on('closed', () => {
         win = null
-    })
+    });
 }
 
 app.allowRendererProcessReuse = false
@@ -50,7 +51,10 @@ app.on('activate', () => {
  * Menu build
  */
 let showOpen = function() {
-	dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'GPX', extensions: ['gpx'] }]});
+	dialog.showOpenDialog({ 
+        properties: [ 'openFile' ], 
+        filters: [{ name: 'GPX', extensions: ['gpx'] }]
+    });
 };
 
 let template = [
@@ -58,7 +62,8 @@ let template = [
       label: 'File',
       submenu: [
         {
-          label: 'Open',
+          label: 'Import File',
+          role:   'Open',
           click: function() { showOpen(); }
         }
       ]
