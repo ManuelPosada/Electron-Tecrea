@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu} = require('electron')
+const {app, BrowserWindow, Menu, dialog} = require('electron')
 const { webFrame } = require('electron/renderer')
 const path = require('path')
 const url = require('url')
@@ -45,3 +45,25 @@ app.on('activate', () => {
         createWindow()
     }
 })
+
+/**
+ * Menu build
+ */
+let showOpen = function() {
+	dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'GPX', extensions: ['gpx'] }]});
+};
+
+let template = [
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: 'Open',
+          click: function() { showOpen(); }
+        }
+      ]
+    }
+  ]
+
+  menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
