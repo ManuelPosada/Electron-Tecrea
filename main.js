@@ -53,7 +53,7 @@ app.on('activate', () => {
 let showOpen = function() {
 	dialog.showOpenDialog({ 
         properties: [ 'openFile' ], 
-        filters: [{ name: 'GPX', extensions: ['gpx'] }]
+        filters: [{ name: 'JSON', extensions: ['json'] }]
     });
 };
 

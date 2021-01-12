@@ -34,11 +34,11 @@ connectButton.addEventListener("click", (event) => {
 
         SerialPort.list().then((deviceList) => {
             deviceList.forEach((Device) => {
-                if (Device.vendorId === VENDOR_ID_FT) {
+                if (Device.vendorId === VENDOR_ID_ST) {
                     showTemaple("dashboard1/dashboard1");
                     openPort(Device.path);
                 }
-                else if ( Device.vendorId === VENDOR_ID_ST) {
+                else if ( Device.vendorId === VENDOR_ID_FT) {
                     showTemaple("dashboard2/dashboard2");
                     openPort(Device.path);
                 }
