@@ -1,7 +1,7 @@
 const SerialPort = require('serialport');
 const ReadLine = require('@serialport/parser-readline');
 
-let BUFFER = [];              /** Incoming data buffer */             
+let BUFFER = [];              /** Incoming data buffer */
 let serialPort = null;        /** Serial Port object */
 let Parser = null;            /** Parser Object*/ 
 
@@ -44,7 +44,7 @@ connectButton.addEventListener("click", (event) => {
                 }
             })
             if(deviceList.length <= 0 ) {
-                showTemaple("dashboard2/dashboard2");
+                showTemaple('dashboardx/disconnect')
             }
         })
     }

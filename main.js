@@ -9,7 +9,7 @@ let win;
 
 function createWindow () {
     win = new BrowserWindow({
-        width:  1310,
+        width:  1300,
         height: 800,
         webPreferences: {
             nodeIntegration: true,
@@ -50,25 +50,25 @@ app.on('activate', () => {
 /**
  * Menu build
  */
-let showOpen = function() {
-	dialog.showOpenDialog({ 
-        properties: [ 'openFile' ], 
-        filters: [{ name: 'JSON', extensions: ['json'] }]
-    });
-};
+// let showOpen = function() {
+// 	dialog.showOpenDialog({ 
+//         properties: [ 'openFile' ], 
+//         filters: [{ name: 'JSON', extensions: ['json'] }]
+//     });
+// };
 
-let template = [
-    {
-      label: 'File',
-      submenu: [
-        {
-          label: 'Import File',
-          role:   'Open',
-          click: function() { showOpen(); }
-        }
-      ]
-    }
-  ]
+// let template = [
+//     {
+//       label: 'File',
+//       submenu: [
+//         {
+//           label: 'Import File',
+//           role:   'Open',
+//           click: function() { showOpen(); }
+//         }
+//       ]
+//     }
+//   ]
 
-  menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
+//   menu = Menu.buildFromTemplate(template);
+//   Menu.setApplicationMenu(menu);

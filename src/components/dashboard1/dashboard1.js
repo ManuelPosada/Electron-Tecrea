@@ -321,6 +321,7 @@ AngleSwitch.addEventListener('change', (event) => {
 let json = {}
 
 const progressBar = document.getElementById('progress_Bar');
+const formDashboard1 = document.getElementById("form-dashboard1");
 
 /**
  * @param {*} commandsList 
@@ -328,6 +329,9 @@ const progressBar = document.getElementById('progress_Bar');
 async function sendCommands (commandsList) {
 
     let progresAdd = 0;
+    document.getElementById('DownLoad').disabled = true;
+    document.getElementById('DownLoad').innerText = 'writing changes...';
+
     progressBar.style.backgroundColor = '#007bff'
     progressBar.style.width = '0%'
     await time.sleep(200);
@@ -337,20 +341,26 @@ async function sendCommands (commandsList) {
         serialPort.write(commandsList[command]);
         await time.sleep(500);
         BUFFER.pop();
-        progresAdd += 5;
         console.log(progresAdd + '%');
+        progresAdd += 5;
         progressBar.style.width = progresAdd + '%';
     }
     await time.sleep(500);
+    document.getElementById('DownLoad').innerText = 'Successful';
+    await time.sleep(500);
     progressBar.style.backgroundColor = 'rgb(35 185 35)';
+    document.getElementById('DownLoad').disabled = false;
+    document.getElementById('DownLoad').innerText = 'DownLoad';
 }
 
 
 const command = new Command();
 
-const formDashboard1 = document.getElementById("form-dashboard1");
 
 formDashboard1.addEventListener("submit", (event) => {
+
+   
+
     event.preventDefault();
     const component = event.target;
 
@@ -435,16 +445,16 @@ const setDataToHTML = (data) => {
 }
 
 
-const WiFiSwitch = document.getElementById('WiFiSwitch')
-const gpsSwitch = document.getElementById('gpsSwitch')
+const WiFiSwitch = document.getElementById('WiFiSwitch');
+const gpsSwitch = document.getElementById('gpsSwitch');
 
 const get_Mode_btn = document.getElementById('get_Mode_btn');
 const get_id_btn = document.getElementById('get_ID_btn');
 const get_Pac_btn = document.getElementById('get_Pac_btn');
 
-const operation_Mode = document.getElementById('operation_Mode')
-const sigfox_ID = document.getElementById('sigfox_ID')
-const sigfox_Pac = document.getElementById('sigfox_Pac')
+const operation_Mode = document.getElementById('operation_Mode');
+const sigfox_ID = document.getElementById('sigfox_ID');
+const sigfox_Pac = document.getElementById('sigfox_Pac');
 
 get_Mode_btn.addEventListener('click', (event) => {
 
@@ -457,12 +467,12 @@ get_Mode_btn.addEventListener('click', (event) => {
 
         switch (response) {
             case '0':
-                operation_Mode.value = 'Wi-Fi'
+                operation_Mode.value = 'Wi-Fi';
                 WiFiSwitch.disabled = false;
                 gpsSwitch.disabled = true;
                 break;
             case '1':
-                operation_Mode.value = 'GPS'
+                operation_Mode.value = 'GPS';
                 WiFiSwitch.disabled = true;
                 gpsSwitch.disabled = false;
                 break;
@@ -477,7 +487,7 @@ get_id_btn.addEventListener('click', (event) => {
         if (BUFFER.length > 1) BUFFER.pop()
         const response = BUFFER.pop();
         console.log(response);
-        sigfox_ID.value = response
+        sigfox_ID.value = response;
     }, 200)
 })
 
@@ -489,6 +499,6 @@ get_Pac_btn.addEventListener('click', (event) => {
         if (BUFFER.length > 1) BUFFER.pop()
         const response = BUFFER.pop();
         console.log(response);
-        sigfox_Pac.value = response
+        sigfox_Pac.value = response;
     }, 200)
 })
